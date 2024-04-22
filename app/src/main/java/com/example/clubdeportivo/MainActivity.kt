@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity() {
             }
             if (loginCorrecto){
                 //Toast.makeText(this, "Usuario correcto", Toast.LENGTH_SHORT).show()
+                DatosCompartidos.usuarioLogueado = usuario
                 val intentar = Intent(this, MenuPrincipal::class.java)
                 startActivity(intentar)
             }else{

@@ -5,6 +5,11 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
+class DatosCompartidos {
+    companion object {
+        var usuarioLogueado: String = ""
+    }
+}
 
 
 class MiBaseDeDatosHelper(context: Context) : SQLiteOpenHelper(context, NOMBRE_BD, null, VERSION_BD) {
