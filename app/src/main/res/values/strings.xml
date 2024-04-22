@@ -5,4 +5,5 @@
     <string name="usuario">Usuario</string>
     <string name="ingreso_al_sistema">Ingreso al sistema</string>
     <string name="logo_de_club">Logo de Club</string>
+    <string name="usuarioHint">Usuario</string>
 </resources>
