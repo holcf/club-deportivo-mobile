@@ -2,12 +2,13 @@ package com.example.clubdeportivo
 
 
 import android.content.Context
+import android.content.Intent
 import androidx.activity.enableEdgeToEdge
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
+//import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -53,10 +54,10 @@ class MainActivity : AppCompatActivity() {
             var loginCorrecto = false
 
             while (cursor.moveToNext()) {
-                val codUsu = cursor.getInt(0)
+                //val codUsu = cursor.getInt(0)
                 val nombreUsu = cursor.getString(1)
                 val passUsu = cursor.getString(2)
-                //Log.d("MiBaseDeDatos", "Libro: $id - $titulo - $autor")
+                //Log.d("MiBaseDeDatos", "nombre: $nombreUsu - clave: $passUsu")
                 if (usuario == nombreUsu && password == passUsu){
                     loginCorrecto = true
                     break
@@ -64,6 +65,8 @@ class MainActivity : AppCompatActivity() {
             }
             if (loginCorrecto){
                 //Toast.makeText(this, "Usuario correcto", Toast.LENGTH_SHORT).show()
+                val intentar = Intent(this, MenuPrincipal::class.java)
+                startActivity(intentar)
             }else{
                 //Toast.makeText(this, "Usuario incorrecto", Toast.LENGTH_SHORT).show()
                 mostrarAlerta(this, "Error de inicio de sesión", "El nombre de usuario o la contraseña son incorrectos.")
@@ -71,8 +74,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             // Cerrar el cursor y la base de datos
-            //cursor.close()
-            // db.close()
+            cursor.close()
+            db.close()
 
         }
     }
