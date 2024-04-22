@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var dbHelper: MiBaseDeDatosHelper
     private lateinit var db: SQLiteDatabase
 
-    fun mostrarAlerta(context: Context, titulo: String, mensaje: String) {
+    private fun mostrarAlerta(context: Context, titulo: String, mensaje: String) {
         val builder = AlertDialog.Builder(context)
         builder.setTitle(titulo)
         builder.setMessage(mensaje)
@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
 
         val buttonAcceder: Button =findViewById(R.id.btnAcceder)
 
-        // add toast to button
         buttonAcceder.setOnClickListener {
 
             // get input text values
