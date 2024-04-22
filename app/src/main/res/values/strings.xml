@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Club Deportivo</string>
+    <string name="acceder">Acceder</string>
+    <string name="password">Password</string>
+    <string name="usuario">Usuario</string>
+    <string name="ingreso_al_sistema">Ingreso al sistema</string>
+    <string name="logo_de_club">Logo de Club</string>
 </resources>
