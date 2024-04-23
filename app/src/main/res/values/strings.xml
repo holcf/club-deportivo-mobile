@@ -8,4 +8,8 @@
     <string name="usuarioHint">Usuario</string>
     <string name="menuprincipal">MenuPrincipal</string>
     <string name="usuarioLogueado">Usuario:</string>
+    <string name="cobrar_actividad">Cobrar Actividad</string>
+    <string name="cobrar_cuota">Cobrar Cuota</string>
+    <string name="inscribir_usurios">Inscribir Usurios</string>
+    <string name="listado_de_cuotas">Listado de Cuotas</string>
 </resources>
