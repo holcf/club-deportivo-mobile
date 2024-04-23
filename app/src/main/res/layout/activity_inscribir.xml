@@ -7,51 +7,167 @@
     android:layout_height="match_parent"
     tools:context=".Inscribir">
 
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Inscribir"
+        android:id="@+id/btnInscribir"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/btnVerCarnet"
+        app:layout_constraintTop_toBottomOf="@id/editTextDate"
+        />
+    <Button
+        android:layout_width="0dp"
+        android:id="@+id/btnVerCarnet"
+        android:layout_height="wrap_content"
+        android:text="Ver Carnet"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnNuevaInscripcion"
+        android:layout_margin="20dp"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/btnInscribir"
+        />
+
+    <Button
+        android:id="@+id/btnNuevaInscripcion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Nueva Inscripción"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnVerCarnet" />
+
     <TextView
         android:id="@+id/txtInscripcion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/inscripcion"
-        tools:layout_editor_absoluteX="175dp"
-        android:textSize="32sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="20dp"
+        android:text="@string/inscripcion"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="175dp"
         tools:layout_editor_absoluteY="292dp" />
 
+    <TextView
+        android:id="@+id/textTipoUSuario"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Tipo de Usuario:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/radiogroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtInscripcion" />
     <RadioGroup
         android:id="@+id/radiogroup"
-        android:layout_width="297dp"
-        android:layout_height="199dp"
+        android:layout_width="0dp"
+        android:layout_marginTop="-15dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-
-        app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintBottom_toTopOf="@id/textDatos"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toBottomOf="@id/txtInscripcion"
-        >
+        app:layout_constraintTop_toBottomOf="@id/textTipoUSuario"
+        app:layout_constraintVertical_bias="0.339">
+
 
         <RadioButton
             android:id="@+id/radioButton1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
+            android:layout_marginLeft="20dp"
 
-
-
-            android:contentDescription="socio"
-            android:text="Socio" />
+             android:text="@string/socio" />
 
         <RadioButton
             android:id="@+id/radioButton2"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="No Socio"
+            android:layout_marginLeft="20dp"
+             android:contentDescription="No Socio"
             android:text="No Socio" />
 
 
-
     </RadioGroup>
+
+    <TextView
+        android:id="@+id/textDatos"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Datos del Usuario:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/editTextNombre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/radiogroup" />
+
+    <EditText
+        android:id="@+id/editTextNombre"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:hint="Nombre"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@id/textDatos"/>
+    <EditText
+        android:id="@+id/editTextDNI"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:hint="DNI"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@id/editTextNombre"/>
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:hint="Email"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@id/editTextDNI"/>
+    <EditText
+        android:id="@+id/editTextDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+         android:layout_margin="20dp"
+        android:focusable="false"
+        android:hint="Fecha de inscripción"
+        android:inputType="date"
+        android:textColorHint="@color/black"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextEmail"
+        />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
