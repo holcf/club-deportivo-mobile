@@ -10,6 +10,7 @@
     <string name="usuarioLogueado">Usuario:</string>
     <string name="cobrar_actividad">Cobrar Actividad</string>
     <string name="cobrar_cuota">Cobrar Cuota</string>
-    <string name="inscribir_usurios">Inscribir Usurios</string>
+    <string name="inscribir_usurios">Inscribir Usuarios</string>
     <string name="listado_de_cuotas">Listado de Cuotas</string>
+    <string name="inscripcion">Inscripción</string>
 </resources>
