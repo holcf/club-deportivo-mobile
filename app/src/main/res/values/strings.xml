@@ -7,4 +7,5 @@
     <string name="logo_de_club">Logo de Club</string>
     <string name="usuarioHint">Usuario</string>
     <string name="menuprincipal">MenuPrincipal</string>
+    <string name="usuarioLogueado">Usuario:</string>
 </resources>
