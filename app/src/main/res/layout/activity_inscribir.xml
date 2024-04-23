@@ -1,38 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".Inscribir">
 
+
+    <CheckBox
+        android:id="@+id/ChkAptoFisico"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Apto Físico"
+        app:layout_constraintTop_toBottomOf="@id/editTextDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnInscribir"
+        android:layout_margin="20dp"
+        />
+
     <Button
+        android:id="@+id/btnInscribir"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Inscribir"
-        android:id="@+id/btnInscribir"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="40dp"
+        android:text="Inscribir"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@id/btnVerCarnet"
-        app:layout_constraintTop_toBottomOf="@id/editTextDate"
-        />
-    <Button
-        android:layout_width="0dp"
-        android:id="@+id/btnVerCarnet"
-        android:layout_height="wrap_content"
-        android:text="Ver Carnet"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnInscribir"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btnNuevaInscripcion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnInscribir" />
+
+    <Button
+        android:id="@+id/btnVerCarnet"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        android:text="Ver Carnet"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/btnInscribir"
-        />
+        app:layout_constraintBottom_toTopOf="@id/btnNuevaInscripcion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnInscribir" />
 
     <Button
         android:id="@+id/btnNuevaInscripcion"
@@ -73,13 +86,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtInscripcion" />
+
     <RadioGroup
         android:id="@+id/radiogroup"
         android:layout_width="0dp"
-        android:layout_marginTop="-15dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="-15dp"
         android:orientation="horizontal"
-         app:layout_constraintBottom_toTopOf="@id/textDatos"
+        app:layout_constraintBottom_toTopOf="@id/textDatos"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -93,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
 
-             android:text="@string/socio" />
+            android:text="@string/socio" />
 
         <RadioButton
             android:id="@+id/radioButton2"
@@ -101,7 +115,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-             android:contentDescription="No Socio"
+            android:contentDescription="No Socio"
             android:text="No Socio" />
 
 
@@ -131,7 +145,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
 
-        app:layout_constraintTop_toBottomOf="@id/textDatos"/>
+        app:layout_constraintTop_toBottomOf="@id/textDatos" />
+
     <EditText
         android:id="@+id/editTextDNI"
         android:layout_width="0dp"
@@ -142,7 +157,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
 
-        app:layout_constraintTop_toBottomOf="@id/editTextNombre"/>
+        app:layout_constraintTop_toBottomOf="@id/editTextNombre" />
+
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="0dp"
@@ -153,21 +169,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
 
-        app:layout_constraintTop_toBottomOf="@id/editTextDNI"/>
+        app:layout_constraintTop_toBottomOf="@id/editTextDNI" />
+
     <EditText
         android:id="@+id/editTextDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-         android:layout_margin="20dp"
+        android:layout_margin="20dp"
         android:focusable="false"
         android:hint="Fecha de inscripción"
         android:inputType="date"
         android:textColorHint="@color/black"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextEmail"
-        />
+        app:layout_constraintTop_toBottomOf="@id/editTextEmail" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
