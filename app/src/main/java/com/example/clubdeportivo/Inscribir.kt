@@ -2,12 +2,13 @@ package com.example.clubdeportivo
 
 import android.app.DatePickerDialog
 import android.content.Context
-import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
-import android.widget.TextView
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -57,11 +58,24 @@ class Inscribir : AppCompatActivity() {
         btnInscribir.setOnClickListener {
             dbHelper = MiBaseDeDatosHelper(this)
             db = dbHelper.writableDatabase
-            // get input text values
-            val nombre = findViewById<EditText>(R.id.editTextNombre).text.toString()
-            val dni = findViewById<EditText>(R.id.editTextDNI).text.toString()
-            val correo = findViewById<EditText>(R.id.editTextEmail).text.toString()
 
+            val radioGroup: RadioGroup = findViewById(R.id.radiogroup)
+            val selectedRadioButtonText: String? = (radioGroup.findViewById<RadioButton>(radioGroup.checkedRadioButtonId))?.text.toString()
+            var tablaTipoUsuario: String = "socio"
+            if (selectedRadioButtonText == "No Socio") {
+                tablaTipoUsuario = "nosocio"
+            }
+
+            val nombre: String = findViewById<EditText>(R.id.editTextNombre).text.toString()
+            val dni: Number = findViewById<EditText>(R.id.editTextDNI).text.toString().toInt()
+            val correo: String = findViewById<EditText>(R.id.editTextEmail).text.toString()
+            val fechaInscripcion: String = findViewById<EditText>(R.id.editTextDate).text.toString()
+            var aptoFisico: Number = 0
+            if (findViewById<CheckBox>(R.id.chkAptoFisico).isChecked) {
+                aptoFisico = 1
+            }
+
+            TODO( "Buscar si ya existe el socio/no socio para no inscribir en ese caso")
 
             //val cursor = db.rawQuery("SELECT * FROM usuario", null)
             //var loginCorrecto = false
@@ -87,10 +101,10 @@ class Inscribir : AppCompatActivity() {
 
             }*/
 
-            db.execSQL("INSERT INTO socio (NSocio, Nombre, DNI, Correo, FechaInscripcion, AptoFisico) " +
-                    "VALUES (?, ?,?,?,?,?)", arrayOf(null, nombre, 12345, "f@f.com", "2021-10-10", 1))
+            db.execSQL("INSERT INTO ${tablaTipoUsuario} (NSocio, Nombre, DNI, Correo, FechaInscripcion, AptoFisico) " +
+                    "VALUES (?, ?,?,?,?,?)", arrayOf(null, nombre, dni, correo, fechaInscripcion, aptoFisico))
 
-            mostrarAlerta(this, "Inscripción", "Inscripción realizada correctamente")
+            mostrarAlerta(this, "Inscripción", "Inscripción realizada correctamente ${selectedRadioButtonText}")
 
             // Cerrar el cursor y la base de datos
             //cursor.close()
