@@ -14,7 +14,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-@Suppress("SpellCheckingInspection")
+
+
 class MainActivity : AppCompatActivity() {
     private lateinit var dbHelper: MiBaseDeDatosHelper
     private lateinit var db: SQLiteDatabase
@@ -40,6 +41,8 @@ class MainActivity : AppCompatActivity() {
 
         dbHelper = MiBaseDeDatosHelper(this)
         db = dbHelper.writableDatabase
+
+
 
         val buttonAcceder: Button =findViewById(R.id.btnAcceder)
         buttonAcceder.setOnClickListener {
