@@ -69,8 +69,11 @@ class Inscribir : AppCompatActivity() {
             }
 
             val nombre: String = findViewById<EditText>(R.id.editTextNombre).text.toString()
-            val dni: Number = findViewById<EditText>(R.id.editTextDNI).text.toString().toInt()
-            val correo: String = findViewById<EditText>(R.id.editTextEmail).text.toString()
+            var dni: Number = 0;
+            if (!findViewById<EditText>(R.id.editTextDNI).text?.toString().isNullOrEmpty()) {
+                dni = findViewById<EditText>(R.id.editTextDNI).text.toString().toInt()
+            }
+             val correo: String = findViewById<EditText>(R.id.editTextEmail).text.toString()
             val fechaInscripcion: String = findViewById<EditText>(R.id.editTextDate).text.toString()
             var aptoFisico: Number = 0
             if (findViewById<CheckBox>(R.id.chkAptoFisico).isChecked) {
@@ -84,9 +87,24 @@ class Inscribir : AppCompatActivity() {
             }
             cursor.close()
 
+            val faltanDatos = nombre.isEmpty() || dni == 0 || correo.isEmpty() || fechaInscripcion.isEmpty()
+
             if (usuarioExiste){
-                mostrarAlerta(this, "Inscripción", "El usuario ya existe.")
-            } else {
+                mostrarAlerta(this, "Inscripción",
+                    "El usuario ya existe.")
+            } else if (faltanDatos) {
+                if (dni == 0) {
+                    mostrarAlerta(this, "Inscripción",
+                        "El DNI debe ser un número mayor a cero.")
+                } else {
+                    mostrarAlerta(
+                        this, "Inscripción",
+                        "Falta completar algún campo del formulario."
+                    )
+                }
+            }
+            else
+             {
                db.execSQL(
                     "INSERT INTO ${tablaTipoUsuario} (NSocio, Nombre, DNI, Correo, FechaInscripcion, AptoFisico) " +
                             "VALUES (?, ?,?,?,?,?)",
