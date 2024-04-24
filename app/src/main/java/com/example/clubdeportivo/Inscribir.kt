@@ -25,6 +25,7 @@ class Inscribir : AppCompatActivity() {
     private lateinit var dbHelper: MiBaseDeDatosHelper
     private lateinit var db: SQLiteDatabase
 
+    // función para mostrar una alerta con un mensaje
     private fun mostrarAlerta(context: Context, titulo: String, mensaje: String) {
         val builder = AlertDialog.Builder(context)
         builder.setTitle(titulo)
@@ -44,42 +45,49 @@ class Inscribir : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        //configura textview de la fecha para que muestre el calendario al hacer click
         editTextDate = findViewById(R.id.editTextDate)
         calendar = Calendar.getInstance()
-
         editTextDate.setOnClickListener {
             showDatePickerDialog()
         }
 
-        val radioGroup: RadioGroup = findViewById(R.id.radiogroup)
+        //radio button socio por defecto
         val radioButtonToCheck: RadioButton = findViewById(R.id.rbtSocio)
         radioButtonToCheck.isChecked = true
 
+        //botón inscribir
         val btnInscribir: Button =findViewById(R.id.btnInscribir)
         btnInscribir.setOnClickListener {
+
+            // inicializa la base de datos
             dbHelper = MiBaseDeDatosHelper(this)
             db = dbHelper.writableDatabase
 
+            // define con que tabla trabajar (socio o nosocio) según la opción seleccionada
             val radioGroup: RadioGroup = findViewById(R.id.radiogroup)
-            val selectedRadioButtonText: String? = (radioGroup.findViewById<RadioButton>(radioGroup.checkedRadioButtonId))?.text.toString()
+            val selectedRadioButtonText: String = (radioGroup.findViewById<RadioButton>(radioGroup.checkedRadioButtonId))?.text.toString()
 
-            var tablaTipoUsuario: String = "socio"
+            var tablaTipoUsuario = "socio"
             if (selectedRadioButtonText == "No Socio") {
                 tablaTipoUsuario = "nosocio"
             }
 
+            //obtiene los valores del formulario
             val nombre: String = findViewById<EditText>(R.id.editTextNombre).text.toString()
-            var dni: Number = 0;
+            var dni: Number = 0
             if (!findViewById<EditText>(R.id.editTextDNI).text?.toString().isNullOrEmpty()) {
                 dni = findViewById<EditText>(R.id.editTextDNI).text.toString().toInt()
             }
-             val correo: String = findViewById<EditText>(R.id.editTextEmail).text.toString()
-            val fechaInscripcion: String = findViewById<EditText>(R.id.editTextDate).text.toString()
+            val correo: String = findViewById<EditText>(R.id.editTextEmail).text.toString()
+            val fechaInscripcion: String = editTextDate.text.toString()
             var aptoFisico: Number = 0
             if (findViewById<CheckBox>(R.id.chkAptoFisico).isChecked) {
                 aptoFisico = 1
             }
 
+            //verifica si el usuario ya existe
             val cursor = db.rawQuery("SELECT COUNT(*) FROM ${tablaTipoUsuario} WHERE DNI=${dni}", null)
             var usuarioExiste = false
             if (cursor.moveToNext() && cursor.getInt(0) > 0) {
@@ -87,6 +95,7 @@ class Inscribir : AppCompatActivity() {
             }
             cursor.close()
 
+            //verifica si faltan datos
             val faltanDatos = nombre.isEmpty() || dni == 0 || correo.isEmpty() || fechaInscripcion.isEmpty()
 
             if (usuarioExiste){
@@ -106,7 +115,7 @@ class Inscribir : AppCompatActivity() {
             else
              {
                db.execSQL(
-                    "INSERT INTO ${tablaTipoUsuario} (NSocio, Nombre, DNI, Correo, FechaInscripcion, AptoFisico) " +
+                    "INSERT INTO $tablaTipoUsuario (NSocio, Nombre, DNI, Correo, FechaInscripcion, AptoFisico) " +
                             "VALUES (?, ?,?,?,?,?)",
                     arrayOf(null, nombre, dni, correo, fechaInscripcion, aptoFisico)
                 )
@@ -127,7 +136,7 @@ class Inscribir : AppCompatActivity() {
 
         val datePickerDialog = DatePickerDialog(
             this,
-            DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            { view, year, month, dayOfMonth ->
                 // Maneja la fecha seleccionada
                 calendar.set(Calendar.YEAR, year)
                 calendar.set(Calendar.MONTH, month)
