@@ -42,10 +42,8 @@ class MainActivity : AppCompatActivity() {
         db = dbHelper.writableDatabase
 
         val buttonAcceder: Button =findViewById(R.id.btnAcceder)
-
         buttonAcceder.setOnClickListener {
 
-            // get input text values
             val usuario = findViewById<EditText>(R.id.editTextUsuario).text.toString()
             val password = findViewById<EditText>(R.id.editTextPassword).text.toString()
 
@@ -53,17 +51,14 @@ class MainActivity : AppCompatActivity() {
             var loginCorrecto = false
 
             while (cursor.moveToNext()) {
-                //val codUsu = cursor.getInt(0)
                 val nombreUsu = cursor.getString(1)
                 val passUsu = cursor.getString(2)
-                //Log.d("MiBaseDeDatos", "nombre: $nombreUsu - clave: $passUsu")
                 if (usuario == nombreUsu && password == passUsu){
                     loginCorrecto = true
                     break
                 }
             }
             if (loginCorrecto){
-                //Toast.makeText(this, "Usuario correcto", Toast.LENGTH_SHORT).show()
                 DatosCompartidos.usuarioLogueado = usuario
                 val intentar = Intent(this, MenuPrincipal::class.java)
                 startActivity(intentar)
@@ -73,7 +68,6 @@ class MainActivity : AppCompatActivity() {
 
             }
 
-            // Cerrar el cursor y la base de datos
             cursor.close()
             db.close()
 
