@@ -51,16 +51,18 @@ class Inscribir : AppCompatActivity() {
             showDatePickerDialog()
         }
 
-
+        val radioGroup: RadioGroup = findViewById(R.id.radiogroup)
+        val radioButtonToCheck: RadioButton = findViewById(R.id.rbtSocio)
+        radioButtonToCheck.isChecked = true
 
         val btnInscribir: Button =findViewById(R.id.btnInscribir)
-
         btnInscribir.setOnClickListener {
             dbHelper = MiBaseDeDatosHelper(this)
             db = dbHelper.writableDatabase
 
             val radioGroup: RadioGroup = findViewById(R.id.radiogroup)
             val selectedRadioButtonText: String? = (radioGroup.findViewById<RadioButton>(radioGroup.checkedRadioButtonId))?.text.toString()
+
             var tablaTipoUsuario: String = "socio"
             if (selectedRadioButtonText == "No Socio") {
                 tablaTipoUsuario = "nosocio"
@@ -75,46 +77,31 @@ class Inscribir : AppCompatActivity() {
                 aptoFisico = 1
             }
 
-            TODO( "Buscar si ya existe el socio/no socio para no inscribir en ese caso")
-
-            //val cursor = db.rawQuery("SELECT * FROM usuario", null)
-            //var loginCorrecto = false
-
-           /* while (cursor.moveToNext()) {
-                //val codUsu = cursor.getInt(0)
-                val nombreUsu = cursor.getString(1)
-                val passUsu = cursor.getString(2)
-                //Log.d("MiBaseDeDatos", "nombre: $nombreUsu - clave: $passUsu")
-                if (usuario == nombreUsu && password == passUsu){
-                    loginCorrecto = true
-                    break
-                }
+            val cursor = db.rawQuery("SELECT COUNT(*) FROM ${tablaTipoUsuario} WHERE DNI=${dni}", null)
+            var usuarioExiste = false
+            if (cursor.moveToNext() && cursor.getInt(0) > 0) {
+                usuarioExiste = true
             }
-            if (loginCorrecto){
-                //Toast.makeText(this, "Usuario correcto", Toast.LENGTH_SHORT).show()
-                DatosCompartidos.usuarioLogueado = usuario
-                val intentar = Intent(this, MenuPrincipal::class.java)
-                startActivity(intentar)
-            }else{
-                //Toast.makeText(this, "Usuario incorrecto", Toast.LENGTH_SHORT).show()
-                mostrarAlerta(this, "Error de inicio de sesión", "El nombre de usuario o la contraseña son incorrectos.")
+            cursor.close()
 
-            }*/
-
-            db.execSQL("INSERT INTO ${tablaTipoUsuario} (NSocio, Nombre, DNI, Correo, FechaInscripcion, AptoFisico) " +
-                    "VALUES (?, ?,?,?,?,?)", arrayOf(null, nombre, dni, correo, fechaInscripcion, aptoFisico))
-
-            mostrarAlerta(this, "Inscripción", "Inscripción realizada correctamente ${selectedRadioButtonText}")
-
-            // Cerrar el cursor y la base de datos
-            //cursor.close()
+            if (usuarioExiste){
+                mostrarAlerta(this, "Inscripción", "El usuario ya existe.")
+            } else {
+               db.execSQL(
+                    "INSERT INTO ${tablaTipoUsuario} (NSocio, Nombre, DNI, Correo, FechaInscripcion, AptoFisico) " +
+                            "VALUES (?, ?,?,?,?,?)",
+                    arrayOf(null, nombre, dni, correo, fechaInscripcion, aptoFisico)
+                )
+               mostrarAlerta(
+                    this,
+                    "Inscripción",
+                    "Inscripción realizada correctamente."
+                )
+            }
             db.close()
-
         }
-
-
-
     }
+
     private fun showDatePickerDialog() {
         val currentYear = calendar.get(Calendar.YEAR)
         val currentMonth = calendar.get(Calendar.MONTH)

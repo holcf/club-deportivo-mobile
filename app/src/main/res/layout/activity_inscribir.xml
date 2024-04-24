@@ -42,6 +42,7 @@
         android:layout_margin="20dp"
         android:text="Ver Carnet"
         android:textSize="16sp"
+        android:enabled="false"
         app:layout_constraintBottom_toTopOf="@id/btnNuevaInscripcion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
