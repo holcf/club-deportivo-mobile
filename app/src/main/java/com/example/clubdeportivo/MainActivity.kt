@@ -1,34 +1,24 @@
 package com.example.clubdeportivo
 
 
-import android.content.Context
-import android.content.Intent
+ import android.content.Intent
 import androidx.activity.enableEdgeToEdge
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 //import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
+ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-
+import com.example.clubdeportivo.metodos.mostrarAlerta
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var dbHelper: MiBaseDeDatosHelper
     private lateinit var db: SQLiteDatabase
 
-    private fun mostrarAlerta(context: Context, titulo: String, mensaje: String) {
-        val builder = AlertDialog.Builder(context)
-        builder.setTitle(titulo)
-        builder.setMessage(mensaje)
-        builder.setPositiveButton("Aceptar") { dialog, which ->
-            // Acción al hacer clic en el botón Aceptar (si es necesario)
-        }
-        builder.show()
-    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

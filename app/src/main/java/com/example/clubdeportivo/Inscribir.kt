@@ -1,8 +1,7 @@
 package com.example.clubdeportivo
 
 import android.app.DatePickerDialog
-import android.content.Context
-import android.database.sqlite.SQLiteDatabase
+ import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
@@ -10,10 +9,10 @@ import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
+ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.clubdeportivo.metodos.mostrarAlerta
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -26,15 +25,7 @@ class Inscribir : AppCompatActivity() {
     private lateinit var db: SQLiteDatabase
 
     // función para mostrar una alerta con un mensaje
-    private fun mostrarAlerta(context: Context, titulo: String, mensaje: String) {
-        val builder = AlertDialog.Builder(context)
-        builder.setTitle(titulo)
-        builder.setMessage(mensaje)
-        builder.setPositiveButton("Aceptar") { dialog, which ->
-            // Acción al hacer clic en el botón Aceptar (si es necesario)
-        }
-        builder.show()
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

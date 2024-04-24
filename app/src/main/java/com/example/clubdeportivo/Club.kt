@@ -3,6 +3,7 @@ package com.example.clubdeportivo
  import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+ import androidx.appcompat.app.AlertDialog
 
 class DatosCompartidos {
     companion object {
@@ -67,6 +68,18 @@ class MiBaseDeDatosHelper(context: Context) : SQLiteOpenHelper(context, NOMBRE_B
        // if (oldVersion == 1 && newVersion == 2) {
          //   db.execSQL("ALTER TABLE libros ADD COLUMN fecha_publicacion INTEGER")
         //}
+    }
+}
+
+object metodos {
+    fun mostrarAlerta(context: Context, titulo: String, mensaje: String) {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle(titulo)
+        builder.setMessage(mensaje)
+        builder.setPositiveButton("Aceptar") { dialog, which ->
+            // Acción al hacer clic en el botón Aceptar (si es necesario)
+        }
+        builder.show()
     }
 }
 
