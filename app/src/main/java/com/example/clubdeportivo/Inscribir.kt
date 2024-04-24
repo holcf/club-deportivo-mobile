@@ -44,6 +44,10 @@ class Inscribir : AppCompatActivity() {
             showDatePickerDialog()
         }
 
+        //desactivar botón ver carnet hasta que se inscriba un usuario
+        val btnVerCarnet: Button = findViewById<Button>(R.id.btnVerCarnet)
+        btnVerCarnet.isEnabled = false
+
         //radio button socio por defecto
         val radioButtonToCheck: RadioButton = findViewById(R.id.rbtSocio)
         radioButtonToCheck.isChecked = true
@@ -103,20 +107,33 @@ class Inscribir : AppCompatActivity() {
                     )
                 }
             }
-            else
-             {
-               db.execSQL(
+            else {
+                db.execSQL(
                     "INSERT INTO $tablaTipoUsuario (NSocio, Nombre, DNI, Correo, FechaInscripcion, AptoFisico) " +
                             "VALUES (?, ?,?,?,?,?)",
                     arrayOf(null, nombre, dni, correo, fechaInscripcion, aptoFisico)
                 )
-               mostrarAlerta(
+                mostrarAlerta(
                     this,
                     "Inscripción",
                     "Inscripción realizada correctamente."
                 )
+                btnVerCarnet.isEnabled = true
+                btnInscribir.isEnabled = false
             }
             db.close()
+        }
+
+        val btnNuevaInscripcion: Button = findViewById<Button> (R.id.btnNuevaInscripcion)
+        btnNuevaInscripcion.setOnClickListener {
+            // Limpia los campos del formulario
+            findViewById<EditText>(R.id.editTextNombre).setText("")
+            findViewById<EditText>(R.id.editTextDNI).setText("")
+            findViewById<EditText>(R.id.editTextEmail).setText("")
+            editTextDate.setText("")
+            findViewById<CheckBox>(R.id.chkAptoFisico).isChecked = false
+            btnVerCarnet.isEnabled = false
+            btnInscribir.isEnabled = true
         }
     }
 
