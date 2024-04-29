@@ -24,9 +24,14 @@ class MenuPrincipal : AppCompatActivity() {
 
 
         val btnInscribir: Button =findViewById(R.id.btnInscribir)
-
         btnInscribir.setOnClickListener {
             val intentar = Intent(this, Inscribir::class.java)
+            startActivity(intentar)
+        }
+
+        val btnListados: Button =findViewById(R.id.btnListado)
+        btnListados.setOnClickListener {
+            val intentar = Intent(this, Listados::class.java)
             startActivity(intentar)
         }
 
