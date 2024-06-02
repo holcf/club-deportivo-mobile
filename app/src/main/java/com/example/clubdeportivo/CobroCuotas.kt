@@ -1,14 +1,9 @@
 package com.example.clubdeportivo
-
-
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
-
- import android.widget.ArrayAdapter
+import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-
-
-
+import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -58,9 +53,7 @@ class CobroCutas : AppCompatActivity() {
         autoCompleteTextView.setOnItemClickListener { parent, view, position, id ->
             val selectedInfo = parent.getItemAtPosition(position) as String
             selectedSocio = socios.find { "${it.dni} - ${it.nombre}" == selectedInfo }
-
             //luego para hacer el cobro usar selectedSocio.nroSocio
-
         }
         autoCompleteTextView.validator = object : AutoCompleteTextView.Validator {
             override fun isValid(text: CharSequence?): Boolean {
@@ -77,6 +70,7 @@ class CobroCutas : AppCompatActivity() {
                 autoCompleteTextView.performValidation()
             }
         }
+
 
 
     }

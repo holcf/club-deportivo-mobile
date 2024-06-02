@@ -11,6 +11,14 @@ class DatosCompartidos {
     }
 }
 
+data class Cuota(
+    var nSocio: Int?=null,
+    var monto: Int?=null,
+    var fechaPago: String?=null,
+    var metodoPago: Int?=null,
+    var fechaInicio: String?=null,
+    var vencimiento: String?=null
+)
 object BaseDatos {
       fun crear(db: SQLiteDatabase){
         // BASE DE DATOS
