@@ -29,6 +29,13 @@ class MenuPrincipal : AppCompatActivity() {
             startActivity(intentar)
         }
 
+        val btnCobrarCuota: Button =findViewById(R.id.btnCobrarCuota)
+        btnCobrarCuota.setOnClickListener {
+            val intentar = Intent(this, CobroCutas::class.java)
+            startActivity(intentar)
+        }
+
+
         val btnListados: Button =findViewById(R.id.btnListado)
         btnListados.setOnClickListener {
             val intentar = Intent(this, Listados::class.java)

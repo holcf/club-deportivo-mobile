@@ -72,8 +72,6 @@ class Listados : AppCompatActivity() {
             dbHelper = MiBaseDeDatosHelper(this)
             db = dbHelper.writableDatabase
 
-
-
             val cursor = db.rawQuery("SELECT * FROM socio", null)
             //val tableLayout = findViewById<android.widget.TableLayout>(R.id.tableLayout)
             while (cursor.moveToNext()) {
@@ -114,7 +112,7 @@ class Listados : AppCompatActivity() {
             // Crear un adaptador para RecyclerView
             val adapter = sociosAdapter(socios)
 
-// Asignar el adaptador al RecyclerView
+            // Asignar el adaptador al RecyclerView
             recyclerView.adapter = adapter
         }
     }

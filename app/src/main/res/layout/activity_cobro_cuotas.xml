@@ -17,73 +17,24 @@
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_min="55dp"
-        app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextSizeCheck,TextSizeCheck" />
-
-    <TextView
-        android:id="@+id/textTipoUSuario"
-        app:layout_constraintWidth_max="320dp"
-
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="0dp"
-
-        android:text="@string/tipo_de_usuario"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/radiogroup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtCobroCuotas" />
 
 
     <RadioGroup
         android:id="@+id/radiogroup"
         android:layout_width="0dp"
-        app:layout_constraintWidth_max="320dp"
-
         android:layout_height="wrap_content"
-        android:layout_marginTop="-25dp"
 
         android:orientation="horizontal"
+
+
         app:layout_constraintBottom_toTopOf="@id/textDatos"
-
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textTipoUSuario"
-        app:layout_constraintVertical_bias="0.339">
-
-
-        <RadioButton
-            android:id="@+id/rbtSocio"
-            android:textSize="20sp"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-
-            android:text="@string/socio" />
-
-        <RadioButton
-            android:id="@+id/rbtNosocio"
-            android:textSize="20sp"
-
-            android:textColor="@color/black"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="@string/no_socio"
-
-            tools:ignore="DuplicateSpeakableTextCheck" />
-
-
-    </RadioGroup>
+        app:layout_constraintWidth_max="320dp" />
     <TextView
         android:id="@+id/textDatos"
         app:layout_constraintWidth_max="320dp"
@@ -92,15 +43,16 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:text="@string/seleccione_socio_no_socio"
+        android:layout_marginTop="20dp"
+        android:text="@string/busque_al_socio_por_dni"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="20sp"
         android:textStyle="bold"
          app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/radiogroup" />
+        app:layout_constraintTop_toBottomOf="@id/txtCobroCuotas" />
 
-    <Spinner
+    <!-- <Spinner
         android:id="@+id/spnSocio"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -112,7 +64,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textDatos"
         app:layout_constraintWidth_max="320dp" />
-
+-->
     <EditText
         android:id="@+id/editTextInicioCuota"
         android:textSize="20sp"
@@ -126,7 +78,7 @@
         android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spnSocio"
+        app:layout_constraintTop_toBottomOf="@id/autoCompleteTextView"
         app:layout_constraintWidth_max="320dp"
         android:autofillHints="" />
     <EditText
@@ -282,15 +234,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnVerComprobante" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="left" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:layout_width="wrap_content"
+
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView"
+
+        android:text="@string/dni"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:barrierDirection="left" />
+         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textDatos"
+        app:layout_constraintWidth_max="320dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

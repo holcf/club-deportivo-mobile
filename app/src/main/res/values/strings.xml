@@ -37,4 +37,5 @@
     <string name="datos_del_usuario">Datos del Usuario:</string>
     <string name="usuario_no_socio">Usuario No Socio</string>
     <string name="ver_carnet">Ver Carnet</string>
+    <string name="busque_al_socio_por_dni">Busque al socio por DNI</string>
 </resources>
