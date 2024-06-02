@@ -32,6 +32,7 @@ class CobroCutas : AppCompatActivity() {
         }
 
         val socios = ArrayList<Socio>()
+        var selectedSocio: Socio? = null
 
         dbHelper = MiBaseDeDatosHelper(this)
         db = dbHelper.writableDatabase
