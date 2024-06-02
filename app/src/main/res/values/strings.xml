@@ -14,4 +14,27 @@
     <string name="listado_de_cuotas">Listado de Cuotas</string>
     <string name="inscripcion">Inscripción</string>
     <string name="socio">Socio</string>
+    <string name="registrar_cobro">Registrar Cobro</string>
+    <string name="nueva_inscripci_n">Nueva Inscripción</string>
+    <string name="ver_comprobante">Ver Comprobante</string>
+    <string name="fecha_de_pago">Fecha de pago</string>
+    <string name="fecha_de_finalizaci_n_de_la_cuota">Fecha de finalización de la cuota</string>
+    <string name="fecha_de_inicio_de_cuota">Fecha de inicio de cuota</string>
+    <string name="efectivo">Efectivo</string>
+    <string name="tipo_de_usuario">Tipo de Usuario:</string>
+    <string name="m_todo_de_pago">Método de pago:</string>
+    <string name="tarjeta">Tarjeta</string>
+    <string name="no_socio">No Socio</string>
+    <string name="monto_a_pagar">Monto a pagar</string>
+    <string name="seleccione_socio_no_socio">Seleccione Socio/No Socio:</string>
+    <string name="cobro_de_cuotas">Cobro de Cuotas</string>
+    <string name="nombre">Nombre</string>
+    <string name="dni">DNI</string>
+    <string name="fecha_de_inscripci_n">Fecha de inscripción</string>
+    <string name="email">Email</string>
+    <string name="apto_f_sico">Apto Físico</string>
+    <string name="inscribir">Inscribir</string>
+    <string name="datos_del_usuario">Datos del Usuario:</string>
+    <string name="usuario_no_socio">Usuario No Socio</string>
+    <string name="ver_carnet">Ver Carnet</string>
 </resources>

@@ -13,21 +13,23 @@
         android:theme="@style/Theme.ClubDeportivo"
         tools:targetApi="31">
         <activity
+            android:name=".CobroCutas"
+            android:exported="false" />
+        <activity
             android:name=".Listados"
-            android:exported="true" >
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Inscribir"
             android:exported="false" />
         <activity
             android:name=".MenuPrincipal"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

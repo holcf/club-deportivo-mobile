@@ -12,9 +12,13 @@
 
     <CheckBox
         android:id="@+id/chkAptoFisico"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Apto Físico"
+        android:text="@string/apto_f_sico"
+        app:layout_constraintWidth_max="320dp"
+        android:textSize="20sp"
+
+
         app:layout_constraintTop_toBottomOf="@id/editTextDate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,8 +32,12 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:text="Inscribir"
-        android:textSize="16sp"
+        android:textSize="20sp"
+
+        android:text="@string/inscribir"
+        app:layout_constraintWidth_max="320dp"
+
+
         app:layout_constraintBottom_toTopOf="@id/btnInscribir"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,8 +48,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="Ver Carnet"
-        android:textSize="16sp"
+        android:text="@string/ver_carnet"
+        android:textSize="20sp"
+
+        app:layout_constraintWidth_max="320dp"
+
         android:enabled="false"
         app:layout_constraintBottom_toTopOf="@id/btnNuevaInscripcion"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,9 +64,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="Nueva Inscripción"
-        android:textSize="16sp"
+        android:text="@string/nueva_inscripci_n"
+        android:textSize="20sp"
+
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_max="320dp"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnVerCarnet" />
 
@@ -75,11 +89,13 @@
 
     <TextView
         android:id="@+id/textTipoUSuario"
+        app:layout_constraintWidth_max="320dp"
+
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:layout_marginTop="20dp"
-        android:text="Tipo de Usuario:"
+        android:text="@string/tipo_de_usuario"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -90,6 +106,8 @@
 
     <RadioGroup
         android:id="@+id/radiogroup"
+        app:layout_constraintWidth_max="320dp"
+
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="-15dp"
@@ -106,7 +124,7 @@
             android:id="@+id/rbtSocio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:textSize="20sp"
 
             android:text="@string/socio" />
 
@@ -115,9 +133,11 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:contentDescription="No Socio"
-            android:text="No Socio" />
+            android:layout_marginStart="20dp"
+            android:textSize="20sp"
+
+            android:contentDescription="@string/usuario_no_socio"
+            android:text="@string/no_socio" />
 
 
     </RadioGroup>
@@ -125,9 +145,11 @@
     <TextView
         android:id="@+id/textDatos"
         android:layout_width="0dp"
+        app:layout_constraintWidth_max="320dp"
+
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="Datos del Usuario:"
+        android:text="@string/datos_del_usuario"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -139,53 +161,77 @@
     <EditText
         android:id="@+id/editTextNombre"
         android:layout_width="0dp"
+        app:layout_constraintWidth_max="320dp"
+
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:hint="Nombre"
+        android:textSize="20sp"
+
+        android:hint="@string/nombre"
         android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
 
-        app:layout_constraintTop_toBottomOf="@id/textDatos" />
+        app:layout_constraintTop_toBottomOf="@id/textDatos"
+        android:autofillHints=""
+        android:inputType="text" />
 
 
     <EditText
         android:id="@+id/editTextDNI"
         android:layout_width="0dp"
+        app:layout_constraintWidth_max="320dp"
+
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:hint="DNI"
+        android:textSize="20sp"
+
+        android:hint="@string/dni"
         android:inputType="number"
         android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
 
-        app:layout_constraintTop_toBottomOf="@id/editTextNombre" />
+        app:layout_constraintTop_toBottomOf="@id/editTextNombre"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="0dp"
+        app:layout_constraintWidth_max="320dp"
+
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:hint="Email"
+        android:textSize="20sp"
+
+        android:hint="@string/email"
         android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
 
-        app:layout_constraintTop_toBottomOf="@id/editTextDNI" />
+        app:layout_constraintTop_toBottomOf="@id/editTextDNI"
+
+        android:inputType="text"
+        android:autofillHints=""
+        tools:ignore="TextFields" />
 
     <EditText
         android:id="@+id/editTextDate"
         android:layout_width="0dp"
+        app:layout_constraintWidth_max="320dp"
+
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:focusable="false"
-        android:hint="Fecha de inscripción"
+        android:hint="@string/fecha_de_inscripci_n"
+        android:textSize="20sp"
+
         android:inputType="date"
         android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextEmail" />
+        app:layout_constraintTop_toBottomOf="@id/editTextEmail"
+        android:autofillHints="" />
 
 
 
