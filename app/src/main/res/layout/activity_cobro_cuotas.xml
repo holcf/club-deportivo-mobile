@@ -214,7 +214,8 @@
         android:layout_marginTop="30dp"
         android:maxWidth="320dp"
         android:text="@string/registrar_cobro"
-        android:textSize="16sp"
+
+        android:textSize="20sp"
          app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editTextMonto" />
@@ -232,7 +233,7 @@
         android:enabled="false"
 
         android:text="@string/ver_comprobante"
-        android:textSize="16sp"
+        android:textSize="20sp"
          app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnCobrar" />
@@ -246,7 +247,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:text="@string/nueva_inscripci_n"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:maxWidth="320dp"
 
         app:layout_constraintEnd_toEndOf="parent"
