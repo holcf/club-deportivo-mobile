@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8D1FF"
+    tools:context=".Inscribir">
+
+    <TextView
+        android:id="@+id/txtCarnet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/carnet"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtLabelTipoUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/tipo_de_usuario"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtValueTipoUsuario"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtValueTipoUsuario" />
+
+    <TextView
+        android:id="@+id/txtValueTipoUsuario"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/socio_no_socio"
+        android:textColor="#D3D3D3"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/txtLabelTipoUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/txtCarnet" />
+
+    <TextView
+        android:id="@+id/txtLabelNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/nombre"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtValueNombre"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtValueNombre" />
+
+    <TextView
+        android:id="@+id/txtValueNombre"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/nombre"
+        android:textColor="#D3D3D3"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txtValueTipoUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/txtValueTipoUsuario" />
+
+    <TextView
+        android:id="@+id/txtLabelApellido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/apellido"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtValueApellido"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtValueApellido" />
+
+    <TextView
+        android:id="@+id/txtValueApellido"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/apellido"
+        android:textColor="#D3D3D3"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txtValueNombre"
+        app:layout_constraintTop_toBottomOf="@+id/txtValueNombre" />
+
+    <TextView
+        android:id="@+id/txtLabelDNI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/dni"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtValueDNI"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtValueDNI" />
+
+    <TextView
+        android:id="@+id/txtValueDNI"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/dni"
+        android:textColor="#D3D3D3"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txtValueApellido"
+        app:layout_constraintTop_toBottomOf="@+id/txtValueApellido" />
+
+    <TextView
+        android:id="@+id/txtLabelDireccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/direccion"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtValueDireccion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtValueDireccion" />
+
+    <TextView
+        android:id="@+id/txtValueDireccion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/direccion"
+        android:textColor="#D3D3D3"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txtValueDNI"
+        app:layout_constraintTop_toBottomOf="@+id/txtValueDNI" />
+
+    <TextView
+        android:id="@+id/txtLabelEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/email"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtValueEmail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtValueEmail" />
+
+    <TextView
+        android:id="@+id/txtValueEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/email"
+        android:textColor="#D3D3D3"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txtValueDireccion"
+        app:layout_constraintTop_toBottomOf="@+id/txtValueDireccion" />
+
+    <TextView
+        android:id="@+id/txtLabelFechaInscripcion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/fecha_de_inscripcion"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtValueFechaInscripcion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtValueFechaInscripcion" />
+
+    <TextView
+        android:id="@+id/txtValueFechaInscripcion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/fecha_de_inscripcion"
+        android:textColor="#D3D3D3"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtValueEmail"
+        app:layout_constraintTop_toBottomOf="@+id/txtValueEmail" />
+
+    <Button
+        android:id="@+id/btnImprimirCarnet"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#3D5AFE"
+        android:text="@string/imprimir_carnet"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
