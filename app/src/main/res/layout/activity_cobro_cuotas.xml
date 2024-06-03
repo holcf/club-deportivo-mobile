@@ -151,7 +151,9 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="20sp"
-
+            android:background="@color/white"
+            android:paddingEnd="10dp"
+            android:paddingStart="2dp"
             android:text="@string/efectivo" />
 
         <RadioButton
@@ -159,8 +161,8 @@
             android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:textSize="20sp"
+             android:textSize="20sp"
+            android:background="@color/white"
 
             android:contentDescription="@string/no_socio"
             android:text="@string/tarjeta" />
@@ -171,7 +173,7 @@
         android:id="@+id/editTextMonto"
         app:layout_constraintWidth_max="320dp"
         android:textSize="20sp"
-
+        android:layout_marginTop="20dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -203,7 +205,7 @@
     <Button
         android:id="@+id/btnVerComprobante"
         app:layout_constraintWidth_max="320dp"
-
+        android:layout_marginTop="10dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -221,7 +223,7 @@
     <Button
         android:id="@+id/btnNuevoCobro"
         app:layout_constraintWidth_max="320dp"
-
+        android:layout_marginTop="10dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -238,7 +240,12 @@
 
     <AutoCompleteTextView
         android:id="@+id/autoCompleteTextView"
-
+        android:background="@color/white"
+        android:paddingBottom="5dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:textSize="20sp"
         android:text="@string/dni"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
