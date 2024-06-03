@@ -246,7 +246,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:text="@string/nueva_inscripci_n"
+        android:text="@string/nuevo_cobro"
         android:textSize="20sp"
         android:maxWidth="320dp"
 

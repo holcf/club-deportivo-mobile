@@ -45,7 +45,7 @@ class Inscribir : AppCompatActivity() {
         }
 
         //desactivar botón ver carnet hasta que se inscriba un usuario
-        val btnVerCarnet: Button = findViewById<Button>(R.id.btnVerCarnet)
+        val btnVerCarnet: Button = findViewById(R.id.btnVerCarnet)
         btnVerCarnet.isEnabled = false
 
         //radio button socio por defecto
@@ -83,7 +83,7 @@ class Inscribir : AppCompatActivity() {
             }
 
             //verifica si el usuario ya existe
-            val cursor = db.rawQuery("SELECT COUNT(*) FROM ${tablaTipoUsuario} WHERE DNI=${dni}", null)
+            val cursor = db.rawQuery("SELECT COUNT(*) FROM $tablaTipoUsuario WHERE DNI=${dni}", null)
             var usuarioExiste = false
             if (cursor.moveToNext() && cursor.getInt(0) > 0) {
                 usuarioExiste = true
@@ -126,7 +126,7 @@ class Inscribir : AppCompatActivity() {
             db.close()
         }
 
-        val btnNuevaInscripcion: Button = findViewById<Button> (R.id.btnNuevaInscripcion)
+        val btnNuevaInscripcion: Button = findViewById(R.id.btnNuevaInscripcion)
         btnNuevaInscripcion.setOnClickListener {
             // Limpia los campos del formulario
             findViewById<EditText>(R.id.editTextNombre).setText("")
@@ -146,7 +146,7 @@ class Inscribir : AppCompatActivity() {
 
         val datePickerDialog = DatePickerDialog(
             this,
-            { view, year, month, dayOfMonth ->
+            { _, year, month, dayOfMonth ->
                 // Maneja la fecha seleccionada
                 calendar.set(Calendar.YEAR, year)
                 calendar.set(Calendar.MONTH, month)

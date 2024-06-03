@@ -64,6 +64,9 @@ class CobroCutas : AppCompatActivity() {
             showDatePickerDialogPago()
         }
 
+        //radio button rbtEfectivo por defecto
+        val radioButtonToCheck: RadioButton = findViewById(R.id.rbtEfectivo)
+        radioButtonToCheck.isChecked = true
 
         val socios = ArrayList<Socio>()
         var selectedSocio: Socio? = null
@@ -160,11 +163,27 @@ class CobroCutas : AppCompatActivity() {
                     "Hubo un error al insertar en la base de datos."
                 )
             }
+            val btnVerComprobante = findViewById<Button>(R.id.btnVerComprobante)
+            btnVerComprobante.isEnabled = true
+            btnCobrarCuota.isEnabled = false
 
-
-            //btnVerCarnet.isEnabled = true
-            //btnInscribir.isEnabled = false
         }
+        val btnNuevoCobro = findViewById<Button>(R.id.btnNuevoCobro)
+        val btnVerComprobante = findViewById<Button>(R.id.btnVerComprobante)
+         btnNuevoCobro.setOnClickListener {
+            // Limpia los campos del formulario
+            findViewById<EditText>(R.id.editTextMonto).setText("")
+            editTextFin.setText("")
+            editTextInicio.setText("")
+            editTextPago.setText("")
+
+            autoCompleteTextView.setText("")
+            btnVerComprobante.isEnabled = false
+            btnCobrarCuota.isEnabled = true
+
+             radioButtonToCheck.isChecked = true
+        }
+
     }
     private fun showDatePickerDialogInicio() {
         val currentYear = calendarInicio.get(Calendar.YEAR)

@@ -39,4 +39,5 @@
     <string name="ver_carnet">Ver Carnet</string>
     <string name="busque_al_socio_por_dni">Busque al socio por DNI</string>
     <string name="cuota">Cuota</string>
+    <string name="nuevo_cobro">Nuevo Cobro</string>
 </resources>
