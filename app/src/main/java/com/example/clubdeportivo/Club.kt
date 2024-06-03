@@ -19,6 +19,11 @@ data class Cuota(
     var fechaInicio: String?=null,
     var vencimiento: String?=null
 )
+
+enum class MetodoPago(val value: Int) {
+    EFECTIVO(0),
+    TARJETA(1)
+}
 object BaseDatos {
       fun crear(db: SQLiteDatabase){
         // BASE DE DATOS

@@ -108,6 +108,8 @@ class Inscribir : AppCompatActivity() {
                 }
             }
             else {
+                //TODO: ver como hice el insert en cobrar cuota, es mejor porque permite checkiar
+                // si se insertó correctamente
                 db.execSQL(
                     "INSERT INTO $tablaTipoUsuario (NSocio, Nombre, DNI, Correo, FechaInscripcion, AptoFisico) " +
                             "VALUES (?, ?,?,?,?,?)",

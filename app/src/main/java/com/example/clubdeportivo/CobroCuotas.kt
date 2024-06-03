@@ -1,9 +1,13 @@
 package com.example.clubdeportivo
+import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Button
 import android.widget.EditText
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -73,5 +77,58 @@ class CobroCutas : AppCompatActivity() {
 
 
 
+        val btnCobrarCuota: Button =findViewById(R.id.btnCobrar)
+        btnCobrarCuota.setOnClickListener {
+            var cuota = Cuota()
+            cuota.nSocio = selectedSocio?.nroSocio
+            cuota.monto = findViewById<EditText>(R.id.editTextMonto).text.toString().toInt()
+            cuota.fechaPago = findViewById<EditText>(R.id.editTextFechaPago).text.toString()
+            cuota.fechaInicio = findViewById<EditText>(R.id.editTextInicioCuota).text.toString()
+            cuota.vencimiento = findViewById<EditText>(R.id.editTextFinCuota).text.toString()
+
+            val radioGroup: RadioGroup = findViewById(R.id.rdgMetodoPago)
+
+            val selectedRadioButtonText: String =
+                (radioGroup.findViewById<RadioButton>(radioGroup.checkedRadioButtonId))?.text.toString()
+            if (selectedRadioButtonText == "Efectivo") {
+                cuota.metodoPago = MetodoPago.EFECTIVO.value
+            } else {
+                cuota.metodoPago = MetodoPago.TARJETA.value
+            }
+
+
+            dbHelper = MiBaseDeDatosHelper(this)
+            db = dbHelper.writableDatabase
+
+            val values = ContentValues().apply {
+                put("NSocio", cuota.nSocio)
+                put("Monto", cuota.monto)
+                put("FechaPago", cuota.fechaPago)
+                put("MetodoPago", cuota.metodoPago)
+                put("FechaInicio", cuota.fechaInicio)
+                put("Vencimiento", cuota.vencimiento)
+            }
+            val newRowId = db.insert("cuotaSocio", null, values)
+
+            db.close()
+
+            if (newRowId != -1L) {
+                metodos.mostrarAlerta(
+                    this,
+                    "Inscripción",
+                    "Inscripción realizada correctamente."
+                )
+            } else {
+                metodos.mostrarAlerta(
+                    this,
+                    "Error",
+                    "Hubo un error al insertar en la base de datos."
+                )
+            }
+
+            db.close()
+            //btnVerCarnet.isEnabled = true
+            //btnInscribir.isEnabled = false
+        }
     }
 }
