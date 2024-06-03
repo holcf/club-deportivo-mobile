@@ -17,24 +17,16 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-
 class CobroCutas : AppCompatActivity() {
     private lateinit var dbHelper: MiBaseDeDatosHelper
     private lateinit var db: SQLiteDatabase
     private lateinit var autoCompleteTextView: AutoCompleteTextView
-
     private lateinit var calendarInicio: Calendar
     private lateinit var calendarFin: Calendar
     private lateinit var calendarPago: Calendar
-
     private lateinit var editTextInicio: EditText
     private lateinit var editTextFin: EditText
     private lateinit var editTextPago: EditText
-
-
-
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,29 +65,26 @@ class CobroCutas : AppCompatActivity() {
 
         dbHelper = MiBaseDeDatosHelper(this)
         db = dbHelper.writableDatabase
-
         val cursor = db.rawQuery("SELECT * FROM socio", null)
         while (cursor.moveToNext()) {
             val nroSocio = cursor.getInt(0)
             val nombre = cursor.getString(1)
             val dni = cursor.getInt(2)
             socios.add(Socio(nroSocio, nombre, dni))
-
         }
         cursor.close()
         db.close()
 
+        /*
+        * Configuración del AutoCompleteTextView
+         */
         autoCompleteTextView = findViewById(R.id.autoCompleteTextView)
-
         val sociosInfo = socios.map { "${it.dni} - ${it.nombre}" }
-
         val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, sociosInfo)
         autoCompleteTextView.setAdapter(adapter)
-
         autoCompleteTextView.setOnItemClickListener { parent, _, position, _ ->
             val selectedInfo = parent.getItemAtPosition(position) as String
             selectedSocio = socios.find { "${it.dni} - ${it.nombre}" == selectedInfo }
-            //luego para hacer el cobro usar selectedSocio.nroSocio
         }
         autoCompleteTextView.validator = object : AutoCompleteTextView.Validator {
             override fun isValid(text: CharSequence?): Boolean {
@@ -105,7 +94,6 @@ class CobroCutas : AppCompatActivity() {
                 return ""
             }
         }
-
         // Validar el texto cuando el campo pierda el foco
         autoCompleteTextView.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
@@ -113,9 +101,7 @@ class CobroCutas : AppCompatActivity() {
             }
         }
 
-
-
-        val btnCobrarCuota: Button =findViewById(R.id.btnCobrar)
+        val btnCobrarCuota: Button = findViewById(R.id.btnCobrar)
         btnCobrarCuota.setOnClickListener {
             val cuota = Cuota()
             cuota.nSocio = selectedSocio?.nroSocio
@@ -134,10 +120,8 @@ class CobroCutas : AppCompatActivity() {
                 cuota.metodoPago = MetodoPago.TARJETA.value
             }
 
-
             dbHelper = MiBaseDeDatosHelper(this)
             db = dbHelper.writableDatabase
-
             val values = ContentValues().apply {
                 put("NSocio", selectedSocio?.nroSocio)
                 put("Monto", cuota.monto)
@@ -147,7 +131,6 @@ class CobroCutas : AppCompatActivity() {
                 put("Vencimiento", cuota.vencimiento)
             }
             val newRowId = db.insert("cuotaSocio", null, values)
-
             db.close()
 
             if (newRowId != -1L) {
@@ -166,25 +149,23 @@ class CobroCutas : AppCompatActivity() {
             val btnVerComprobante = findViewById<Button>(R.id.btnVerComprobante)
             btnVerComprobante.isEnabled = true
             btnCobrarCuota.isEnabled = false
-
         }
+
         val btnNuevoCobro = findViewById<Button>(R.id.btnNuevoCobro)
         val btnVerComprobante = findViewById<Button>(R.id.btnVerComprobante)
-         btnNuevoCobro.setOnClickListener {
+        btnNuevoCobro.setOnClickListener {
             // Limpia los campos del formulario
             findViewById<EditText>(R.id.editTextMonto).setText("")
             editTextFin.setText("")
             editTextInicio.setText("")
             editTextPago.setText("")
-
             autoCompleteTextView.setText("")
             btnVerComprobante.isEnabled = false
             btnCobrarCuota.isEnabled = true
-
-             radioButtonToCheck.isChecked = true
+            radioButtonToCheck.isChecked = true
         }
-
     }
+
     private fun showDatePickerDialogInicio() {
         val currentYear = calendarInicio.get(Calendar.YEAR)
         val currentMonth = calendarInicio.get(Calendar.MONTH)
