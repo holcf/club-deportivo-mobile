@@ -4,4 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00000000</color>
     <color name="light_gray">#e8e8e8</color>
+    <color name="Azul">#4161D2</color>
+    <color name="Rosa">#F7D6FF</color>
+
 </resources>
