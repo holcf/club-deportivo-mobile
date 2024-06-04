@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CobroCuotas">
+    tools:context=".CobroActividades">
 
 
     <TextView
@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="@string/cobro_de_cuotas"
+        android:text="@string/cobro_de_actividades"
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +44,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        android:text="@string/busque_al_socio_por_dni"
+        android:text="@string/busque_al_no_socio_por_dni"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -65,64 +65,31 @@
         app:layout_constraintTop_toBottomOf="@id/textDatos"
         app:layout_constraintWidth_max="320dp" />
 -->
-    <EditText
-        android:id="@+id/editTextInicioCuota"
-        android:textSize="20sp"
-
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:focusable="false"
-        android:hint="@string/fecha_de_inicio_de_cuota"
-        android:inputType="date"
-        android:textColorHint="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textActividad"
-        app:layout_constraintWidth_max="320dp"
-        android:autofillHints="" />
-    <EditText
-        android:id="@+id/editTextFinCuota"
-        app:layout_constraintWidth_max="320dp"
-        android:textSize="20sp"
-
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:focusable="false"
-        android:hint="@string/fecha_de_finalizaci_n_de_la_cuota"
-        android:inputType="date"
-        android:textColorHint="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextInicioCuota"
-        android:autofillHints="" />
 
     <EditText
         android:id="@+id/editTextFechaPago"
-        app:layout_constraintWidth_max="320dp"
-        android:textSize="20sp"
-
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginTop="5dp"
+        android:autofillHints=""
         android:focusable="false"
         android:hint="@string/fecha_de_pago"
         android:inputType="date"
         android:textColorHint="@color/black"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextFinCuota"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@id/textActividad"
+        app:layout_constraintWidth_max="320dp"
+        tools:layout_editor_absoluteY="313dp" />
     <TextView
         android:id="@+id/textActividad"
         app:layout_constraintWidth_max="320dp"
 
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
         android:layout_marginTop="20dp"
-        android:text="@string/cuota"
+        android:text="@string/actividad"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="20sp"
         android:textStyle="bold"

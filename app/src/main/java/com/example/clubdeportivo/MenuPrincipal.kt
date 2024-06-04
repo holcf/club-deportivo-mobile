@@ -1,5 +1,6 @@
 package com.example.clubdeportivo
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -10,6 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MenuPrincipal : AppCompatActivity() {
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -31,7 +33,13 @@ class MenuPrincipal : AppCompatActivity() {
 
         val btnCobrarCuota: Button =findViewById(R.id.btnCobrarCuota)
         btnCobrarCuota.setOnClickListener {
-            val intentar = Intent(this, CobroCutas::class.java)
+            val intentar = Intent(this, CobroCuotas::class.java)
+            startActivity(intentar)
+        }
+
+        val btnCobroActividades: Button =findViewById(R.id.btnCobrarActividad)
+        btnCobroActividades.setOnClickListener {
+            val intentar = Intent(this, CobroActividades::class.java)
             startActivity(intentar)
         }
 

@@ -17,40 +17,25 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class CobroCuotas : AppCompatActivity() {
+class CobroActividades : AppCompatActivity() {
     private lateinit var dbHelper: MiBaseDeDatosHelper
     private lateinit var db: SQLiteDatabase
     private lateinit var autoCompleteTextView: AutoCompleteTextView
-    private lateinit var calendarInicio: Calendar
-    private lateinit var calendarFin: Calendar
     private lateinit var calendarPago: Calendar
-    private lateinit var editTextInicio: EditText
-    private lateinit var editTextFin: EditText
     private lateinit var editTextPago: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_cobro_cuotas)
+        setContentView(R.layout.activity_cobro_actividades)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        calendarInicio = Calendar.getInstance()
-        calendarFin = Calendar.getInstance()
         calendarPago = Calendar.getInstance()
-        editTextInicio = findViewById(R.id.editTextInicioCuota)
-        editTextFin = findViewById(R.id.editTextFinCuota)
         editTextPago = findViewById(R.id.editTextFechaPago)
-
-        editTextInicio.setOnClickListener {
-            showDatePickerDialogInicio()
-        }
-        editTextFin.setOnClickListener {
-            showDatePickerDialogFin()
-        }
         editTextPago.setOnClickListener {
             showDatePickerDialogPago()
         }
@@ -63,10 +48,10 @@ class CobroCuotas : AppCompatActivity() {
         // Carga datos de socios para el AutoCompleteTextView
         //
         val socios = ArrayList<Socio>()
-        var selectedSocio: Socio? = null
+        var selectedNoSocio: Socio? = null
         dbHelper = MiBaseDeDatosHelper(this)
         db = dbHelper.writableDatabase
-        val cursor = db.rawQuery("SELECT * FROM socio", null)
+        val cursor = db.rawQuery("SELECT * FROM nosocio", null)
         while (cursor.moveToNext()) {
             val nroSocio = cursor.getInt(0)
             val nombre = cursor.getString(1)
@@ -85,7 +70,7 @@ class CobroCuotas : AppCompatActivity() {
         autoCompleteTextView.setAdapter(adapter)
         autoCompleteTextView.setOnItemClickListener { parent, _, position, _ ->
             val selectedInfo = parent.getItemAtPosition(position) as String
-            selectedSocio = socios.find { "${it.dni} - ${it.nombre}" == selectedInfo }
+            selectedNoSocio = socios.find { "${it.dni} - ${it.nombre}" == selectedInfo }
         }
         autoCompleteTextView.validator = object : AutoCompleteTextView.Validator {
             override fun isValid(text: CharSequence?): Boolean {
@@ -105,14 +90,14 @@ class CobroCuotas : AppCompatActivity() {
         //
         // Botón Cobrar Cuota
         //
-        val btnCobrarCuota: Button = findViewById(R.id.btnCobrar)
-        btnCobrarCuota.setOnClickListener {
+        val btnCobrarActividad: Button = findViewById(R.id.btnCobrar)
+        btnCobrarActividad.setOnClickListener {
 
             val cuota = Cuota()
-            if (selectedSocio == null) {
+            if (selectedNoSocio == null) {
                 cuota.nSocio = -1
             } else {
-                cuota.nSocio = selectedSocio?.nroSocio
+                cuota.nSocio = selectedNoSocio?.nroSocio
             }
             if (findViewById<EditText>(R.id.editTextMonto).text.toString().isEmpty()) {
                 cuota.monto = -1
@@ -120,8 +105,7 @@ class CobroCuotas : AppCompatActivity() {
                 cuota.monto = findViewById<EditText>(R.id.editTextMonto).text.toString().toInt()
             }
             cuota.fechaPago = editTextPago.text.toString()
-            cuota.fechaInicio = editTextInicio.text.toString()
-            cuota.vencimiento = editTextFin.text.toString()
+
 
             val radioGroup: RadioGroup = findViewById(R.id.rdgMetodoPago)
             val selectedRadioButtonText: String =
@@ -134,43 +118,39 @@ class CobroCuotas : AppCompatActivity() {
 
             if (cuota.nSocio!! <= 0) {
                 metodos.mostrarAlerta(
-                    this, "Cobro de cuota",
-                    "El socio seleccionado no es válido."
+                    this, "Cobro de actividad",
+                    "El No Socio seleccionado no es válido."
                 )
             } else if (cuota.monto!! <= 0) {
                 metodos.mostrarAlerta(
-                    this, "Cobro de cuota",
+                    this, "Cobro de actividad",
                     "El monto debe ser un número mayor a cero."
                 )
             }
             else
-                if (cuota.fechaPago!!.isEmpty()
-                || cuota.fechaInicio!!.isEmpty()
-                || cuota.vencimiento!!.isEmpty()){
+                if (cuota.fechaPago!!.isEmpty()){
                 metodos.mostrarAlerta(
-                    this, "Cobro de cuota",
-                    "Falta completar algún campo del formulario."
+                    this, "Cobro de actividad",
+                    "Falta completar la fecha de pago."
                 )
             }
             else {
                 dbHelper = MiBaseDeDatosHelper(this)
                 db = dbHelper.writableDatabase
                 val values = ContentValues().apply {
-                    put("NSocio", selectedSocio?.nroSocio)
+                    put("NSocio", selectedNoSocio?.nroSocio)
                     put("Monto", cuota.monto)
                     put("FechaPago", cuota.fechaPago)
                     put("MetodoPago", cuota.metodoPago)
-                    put("FechaInicio", cuota.fechaInicio)
-                    put("Vencimiento", cuota.vencimiento)
                 }
-                val newRowId = db.insert("cuotaSocio", null, values)
+                val newRowId = db.insert("cuotadiaria", null, values)
                 db.close()
 
                 if (newRowId != -1L) {
                     metodos.mostrarAlerta(
                         this,
-                        "Cobro de cuota",
-                        "Cobro de cuota realizado correctamente."
+                        "Cobro de actividad",
+                        "Cobro de actividad realizado correctamente."
                     )
                 } else {
                     metodos.mostrarAlerta(
@@ -181,7 +161,7 @@ class CobroCuotas : AppCompatActivity() {
                 }
                 val btnVerComprobante = findViewById<Button>(R.id.btnVerComprobante)
                 btnVerComprobante.isEnabled = true
-                btnCobrarCuota.isEnabled = false
+                btnCobrarActividad.isEnabled = false
             }
         }
 
@@ -193,56 +173,14 @@ class CobroCuotas : AppCompatActivity() {
         btnNuevoCobro.setOnClickListener {
             // Limpia los campos del formulario
             findViewById<EditText>(R.id.editTextMonto).setText("")
-            editTextFin.setText("")
-            editTextInicio.setText("")
             editTextPago.setText("")
             autoCompleteTextView.setText("")
             btnVerComprobante.isEnabled = false
-            btnCobrarCuota.isEnabled = true
+            btnCobrarActividad.isEnabled = true
             radioButtonToCheck.isChecked = true
         }
     }
 
-    private fun showDatePickerDialogInicio() {
-        val currentYear = calendarInicio.get(Calendar.YEAR)
-        val currentMonth = calendarInicio.get(Calendar.MONTH)
-        val currentDay = calendarInicio.get(Calendar.DAY_OF_MONTH)
-        val datePickerDialog = DatePickerDialog(
-            this,
-            { _, year, month, dayOfMonth ->
-                calendarInicio.set(Calendar.YEAR, year)
-                calendarInicio.set(Calendar.MONTH, month)
-                calendarInicio.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                val selectedDate = dateFormat.format(calendarInicio.time)
-                editTextInicio.setText(selectedDate)
-            },
-            currentYear,
-            currentMonth,
-            currentDay
-        )
-        datePickerDialog.show()
-    }
-    private fun showDatePickerDialogFin() {
-        val currentYear = calendarFin.get(Calendar.YEAR)
-        val currentMonth = calendarFin.get(Calendar.MONTH)
-        val currentDay = calendarFin.get(Calendar.DAY_OF_MONTH)
-        val datePickerDialog = DatePickerDialog(
-            this,
-            { _, year, month, dayOfMonth ->
-                calendarFin.set(Calendar.YEAR, year)
-                calendarFin.set(Calendar.MONTH, month)
-                calendarFin.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                val selectedDate = dateFormat.format(calendarFin.time)
-                editTextFin.setText(selectedDate)
-            },
-            currentYear,
-            currentMonth,
-            currentDay
-        )
-        datePickerDialog.show()
-    }
     private fun showDatePickerDialogPago() {
         val currentYear = calendarPago.get(Calendar.YEAR)
         val currentMonth = calendarPago.get(Calendar.MONTH)
