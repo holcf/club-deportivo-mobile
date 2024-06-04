@@ -43,4 +43,7 @@
     <string name="nroSocio">Nª</string>
     <string name="vencimiento_de_cuota">Vencimiento de cuota</string>
     <string name="listado_de_socios_con_cuotas_vencidas">Listado de Socios con cuotas vencidas</string>
+    <string name="cobro_de_actividades">Cobro de actividades</string>
+    <string name="busque_al_no_socio_por_dni">Busque al No Socio por DNI</string>
+    <string name="actividad">Actividad</string>
 </resources>
