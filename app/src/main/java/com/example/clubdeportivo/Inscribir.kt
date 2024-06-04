@@ -152,7 +152,7 @@ class Inscribir : AppCompatActivity() {
                 calendar.set(Calendar.MONTH, month)
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-                val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                 val selectedDate = dateFormat.format(calendar.time)
 
                 editTextDate.setText(selectedDate)

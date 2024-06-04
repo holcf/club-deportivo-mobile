@@ -213,7 +213,7 @@ class CobroCutas : AppCompatActivity() {
                 calendarInicio.set(Calendar.YEAR, year)
                 calendarInicio.set(Calendar.MONTH, month)
                 calendarInicio.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                 val selectedDate = dateFormat.format(calendarInicio.time)
                 editTextInicio.setText(selectedDate)
             },
@@ -233,7 +233,7 @@ class CobroCutas : AppCompatActivity() {
                 calendarFin.set(Calendar.YEAR, year)
                 calendarFin.set(Calendar.MONTH, month)
                 calendarFin.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                 val selectedDate = dateFormat.format(calendarFin.time)
                 editTextFin.setText(selectedDate)
             },
@@ -253,7 +253,7 @@ class CobroCutas : AppCompatActivity() {
                 calendarPago.set(Calendar.YEAR, year)
                 calendarPago.set(Calendar.MONTH, month)
                 calendarPago.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                 val selectedDate = dateFormat.format(calendarPago.time)
                 editTextPago.setText(selectedDate)
             },

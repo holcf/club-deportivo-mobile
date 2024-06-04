@@ -1,6 +1,6 @@
 package com.example.clubdeportivo
 
-//TODO query para el listado de socios con cuotas vencidas:
+
 /*
  SELECT Nsocio, Nombre, DNI, ifnull (MCuota, '') AS VencimientoCuota
 FROM (
@@ -9,11 +9,9 @@ FROM (
   JOIN cuotaSocio ON socio.Nsocio = cuotaSocio.Nsocio
   GROUP BY socio.Nsocio
 ) t1
-WHERE MCuota <= datetime('now');
+WHERE datetime(MCuota) <= datetime('now');
  */
-//TODO ojo, según chatgpt "Asegúrate de que las fechas en la columna Vencimiento estén
-// en un formato ISO 8601 (YYYY-MM-DD HH:MM:SS),
-// ya que SQLite realiza comparaciones de fecha y hora en este formato.
+
 
 import android.content.ContentValues.TAG
 import android.database.sqlite.SQLiteDatabase
