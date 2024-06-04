@@ -41,7 +41,6 @@ class CobroCutas : AppCompatActivity() {
         calendarInicio = Calendar.getInstance()
         calendarFin = Calendar.getInstance()
         calendarPago = Calendar.getInstance()
-
         editTextInicio = findViewById(R.id.editTextInicioCuota)
         editTextFin = findViewById(R.id.editTextFinCuota)
         editTextPago = findViewById(R.id.editTextFechaPago)
@@ -60,9 +59,11 @@ class CobroCutas : AppCompatActivity() {
         val radioButtonToCheck: RadioButton = findViewById(R.id.rbtEfectivo)
         radioButtonToCheck.isChecked = true
 
+        //
+        // Carga datos de socios para el AutoCompleteTextView
+        //
         val socios = ArrayList<Socio>()
         var selectedSocio: Socio? = null
-
         dbHelper = MiBaseDeDatosHelper(this)
         db = dbHelper.writableDatabase
         val cursor = db.rawQuery("SELECT * FROM socio", null)
@@ -75,9 +76,9 @@ class CobroCutas : AppCompatActivity() {
         cursor.close()
         db.close()
 
-        /*
-        * Configuración del AutoCompleteTextView
-         */
+        //
+        // Configuración del AutoCompleteTextView
+        //
         autoCompleteTextView = findViewById(R.id.autoCompleteTextView)
         val sociosInfo = socios.map { "${it.dni} - ${it.nombre}" }
         val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, sociosInfo)
@@ -101,17 +102,28 @@ class CobroCutas : AppCompatActivity() {
             }
         }
 
+        //
+        // Botón Cobrar Cuota
+        //
         val btnCobrarCuota: Button = findViewById(R.id.btnCobrar)
         btnCobrarCuota.setOnClickListener {
+
             val cuota = Cuota()
-            cuota.nSocio = selectedSocio?.nroSocio
-            cuota.monto = findViewById<EditText>(R.id.editTextMonto).text.toString().toInt()
+            if (selectedSocio == null) {
+                cuota.nSocio = -1
+            } else {
+                cuota.nSocio = selectedSocio?.nroSocio
+            }
+            if (findViewById<EditText>(R.id.editTextMonto).text.toString().isEmpty()) {
+                cuota.monto = -1
+            } else {
+                cuota.monto = findViewById<EditText>(R.id.editTextMonto).text.toString().toInt()
+            }
             cuota.fechaPago = editTextPago.text.toString()
             cuota.fechaInicio = editTextInicio.text.toString()
             cuota.vencimiento = editTextFin.text.toString()
 
             val radioGroup: RadioGroup = findViewById(R.id.rdgMetodoPago)
-
             val selectedRadioButtonText: String =
                 (radioGroup.findViewById<RadioButton>(radioGroup.checkedRadioButtonId))?.text.toString()
             if (selectedRadioButtonText == "Efectivo") {
@@ -120,37 +132,62 @@ class CobroCutas : AppCompatActivity() {
                 cuota.metodoPago = MetodoPago.TARJETA.value
             }
 
-            dbHelper = MiBaseDeDatosHelper(this)
-            db = dbHelper.writableDatabase
-            val values = ContentValues().apply {
-                put("NSocio", selectedSocio?.nroSocio)
-                put("Monto", cuota.monto)
-                put("FechaPago", cuota.fechaPago)
-                put("MetodoPago", cuota.metodoPago)
-                put("FechaInicio", cuota.fechaInicio)
-                put("Vencimiento", cuota.vencimiento)
+            if (cuota.nSocio!! <= 0) {
+                metodos.mostrarAlerta(
+                    this, "Cobro de cuota",
+                    "El socio seleccionado no es válido."
+                )
+            } else if (cuota.monto!! <= 0) {
+                metodos.mostrarAlerta(
+                    this, "Cobro de cuota",
+                    "El monto debe ser un número mayor a cero."
+                )
             }
-            val newRowId = db.insert("cuotaSocio", null, values)
-            db.close()
+            else
+                if (cuota.fechaPago!!.isEmpty()
+                || cuota.fechaInicio!!.isEmpty()
+                || cuota.vencimiento!!.isEmpty()){
+                metodos.mostrarAlerta(
+                    this, "Cobro de cuota",
+                    "Falta completar algún campo del formulario."
+                )
+            }
+            else {
+                dbHelper = MiBaseDeDatosHelper(this)
+                db = dbHelper.writableDatabase
+                val values = ContentValues().apply {
+                    put("NSocio", selectedSocio?.nroSocio)
+                    put("Monto", cuota.monto)
+                    put("FechaPago", cuota.fechaPago)
+                    put("MetodoPago", cuota.metodoPago)
+                    put("FechaInicio", cuota.fechaInicio)
+                    put("Vencimiento", cuota.vencimiento)
+                }
+                val newRowId = db.insert("cuotaSocio", null, values)
+                db.close()
 
-            if (newRowId != -1L) {
-                metodos.mostrarAlerta(
-                    this,
-                    "Cobro de cuota",
-                    "Cobro de cuota realizado correctamente."
-                )
-            } else {
-                metodos.mostrarAlerta(
-                    this,
-                    "Error",
-                    "Hubo un error al insertar en la base de datos."
-                )
+                if (newRowId != -1L) {
+                    metodos.mostrarAlerta(
+                        this,
+                        "Cobro de cuota",
+                        "Cobro de cuota realizado correctamente."
+                    )
+                } else {
+                    metodos.mostrarAlerta(
+                        this,
+                        "Error",
+                        "Hubo un error al insertar en la base de datos."
+                    )
+                }
+                val btnVerComprobante = findViewById<Button>(R.id.btnVerComprobante)
+                btnVerComprobante.isEnabled = true
+                btnCobrarCuota.isEnabled = false
             }
-            val btnVerComprobante = findViewById<Button>(R.id.btnVerComprobante)
-            btnVerComprobante.isEnabled = true
-            btnCobrarCuota.isEnabled = false
         }
 
+        //
+        // Botón nuevo cobro
+        //
         val btnNuevoCobro = findViewById<Button>(R.id.btnNuevoCobro)
         val btnVerComprobante = findViewById<Button>(R.id.btnVerComprobante)
         btnNuevoCobro.setOnClickListener {
