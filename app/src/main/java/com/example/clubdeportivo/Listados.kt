@@ -13,10 +13,8 @@ WHERE datetime(MCuota) <= datetime('now');
  */
 
 
-import android.content.ContentValues.TAG
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,29 +30,38 @@ import androidx.recyclerview.widget.RecyclerView
 data class Socio (
     val nroSocio: Int,
     val nombre: String,
-    val dni: Int
+    val dni: Int,
 )
-class sociosAdapter(private val socios: List<Socio>) :
-    RecyclerView.Adapter<sociosAdapter.socioViewHolder>() {
 
-    class socioViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+data class SocioListado (
+    val nroSocio: Int,
+    val nombre: String,
+    val dni: Int,
+    val vencimientoCuota: String
+)
+class SociosAdapter(private val socios: List<SocioListado>) :
+    RecyclerView.Adapter<SociosAdapter.SocioViewHolder>() {
+
+    class SocioViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nombreTextView: TextView = itemView.findViewById(R.id.nombreTextView)
         val nroSocioTextView: TextView = itemView.findViewById(R.id.nroSocioTextView)
         val dniTextView: TextView = itemView.findViewById(R.id.dniTextView)
+        val vencimientoCuotaTextView: TextView = itemView.findViewById(R.id.vencimientoTextView)
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): socioViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SocioViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.fila_listado_socios, parent, false)
-        return socioViewHolder(itemView)
+        return SocioViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: socioViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SocioViewHolder, position: Int) {
         val socio = socios[position]
         holder.nombreTextView.text = socio.nombre
         holder.nroSocioTextView.text = socio.nroSocio.toString()
         holder.dniTextView.text = socio.dni.toString()
+        holder.vencimientoCuotaTextView.text = socio.vencimientoCuota
     }
 
     override fun getItemCount(): Int {
@@ -74,60 +81,41 @@ class Listados : AppCompatActivity() {
             insets
         }
 
-        val socios = mutableListOf<Socio>()
+        val socios = mutableListOf<SocioListado>()
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
 
-        val btnListadoSocios: Button = findViewById<Button>(R.id.btnListadoSocios)
-        btnListadoSocios.setOnClickListener {
+
             dbHelper = MiBaseDeDatosHelper(this)
             db = dbHelper.writableDatabase
 
-            val cursor = db.rawQuery("SELECT * FROM socio", null)
-            //val tableLayout = findViewById<android.widget.TableLayout>(R.id.tableLayout)
+            //val cursor = db.rawQuery("SELECT * FROM socio", null)
+
+            val cursor = db.rawQuery("SELECT Nsocio, Nombre, DNI, ifnull (MCuota, '') AS VencimientoCuota " +
+                    "FROM (SELECT socio.Nsocio, socio.Nombre, socio.DNI, MAX(cuotaSocio.Vencimiento) AS MCuota " +
+                    "FROM socio " +
+                    "JOIN cuotaSocio ON socio.Nsocio = cuotaSocio.Nsocio " +
+                    "GROUP BY socio.Nsocio) t1 " +
+                    "WHERE datetime(MCuota) <= datetime('now')", null)
+
             while (cursor.moveToNext()) {
                 val nroSocio = cursor.getInt(0)
                 val nombre = cursor.getString(1)
                 val dni = cursor.getInt(2)
-                socios.add(Socio(nroSocio, nombre, dni))
-
-                /*
-                val tableRow = TableRow(this)
-                tableRow.setPadding(10, 10, 10, 10)
-                val nroSocioTextView = TextView(this)
-                nroSocioTextView.setPadding(10, 10, 10, 10)
-                nroSocioTextView.text = nroSocio.toString()
-
-                val nombreTextView = TextView(this)
-                nombreTextView.setPadding(10, 10, 10, 10)
-
-                nombreTextView.text = nombre
-                val dniTextView = TextView(this)
-                dniTextView.setPadding(10, 10, 10, 10)
-
-                dniTextView.text = dni.toString()
-
-                // Agregar TextViews a la fila
-                tableRow.addView(nroSocioTextView)
-                tableRow.addView(nombreTextView)
-                tableRow.addView(dniTextView)
-
-                // Agregar la fila a la tabla
-                tableLayout.addView(tableRow)
-
-                 */
+                val vencimientoCuota = cursor.getString(3)
+                socios.add(SocioListado(nroSocio, nombre, dni, vencimientoCuota))
             }
             cursor.close()
             db.close()
-            Log.d(TAG, socios.toString())
+            //Log.d(TAG, socios.toString())
             // Crear un adaptador para RecyclerView
-            val adapter = sociosAdapter(socios)
+            val adapter = SociosAdapter(socios)
 
             // Asignar el adaptador al RecyclerView
             recyclerView.adapter = adapter
-        }
+
     }
 
 

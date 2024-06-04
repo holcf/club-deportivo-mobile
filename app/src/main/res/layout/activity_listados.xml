@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Listados">
@@ -22,27 +23,95 @@
 
     </TableLayout> -->
 
-    <Button
-        android:id="@+id/btnListadoSocios"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Listado de Socios"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-          android:layout_margin="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnListadoSocios"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+          android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
 
+app:layout_constraintTop_toBottomOf="@id/rowLabels"        />
+
+    <TextView
+        android:id="@+id/tituloListadoSociosTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Listado de Socios con cuotas vencidas"
+        android:textSize="16sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rowLabels"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:gravity="center"
+        />
+    <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rowLabels"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+
+
+        app:layout_constraintTop_toTopOf="@id/tituloListadoSociosTextView"
+        app:layout_constraintBottom_toTopOf="@id/recyclerView"
+        >
+
+        <TextView
+        android:id="@+id/labelNroSocioTextView"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.35"
+        android:text="Nª"
+            android:textStyle="bold"
+
+            android:textSize="18sp"
+        android:padding="10dp"
+        android:background="@color/light_gray" />
+
+        <TextView
+            android:id="@+id/labelNombreTextView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Nombre"
+            android:textStyle="bold"
+
+            android:textSize="18sp"
+            android:padding="10dp"
+            android:background="@color/light_gray" />
+
+        <TextView
+            android:id="@+id/labelDniTextView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:text="DNI"
+            android:textSize="18sp"
+            android:padding="10dp"
+            android:textStyle="bold"
+
+            android:background="@color/light_gray" />
+        <TextView
+            android:id="@+id/labelVencimientoTextView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Vencimiento de cuota"
+            android:textSize="18sp"
+            android:textStyle="bold"
+
+            android:padding="10dp"
+            android:background="@color/light_gray" />
+
+    </TableRow>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

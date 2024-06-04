@@ -2,18 +2,24 @@
 <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp">
+
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="5dp"
+
+    >
+
 
 
     <TextView
         android:id="@+id/nroSocioTextView"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.3"
+        android:layout_weight="0.35"
         android:text="nroSocio"
         android:textSize="18sp"
         android:padding="10dp"
-        android:background="@color/light_gray" />
+        android:background="@color/white" />
 
     <TextView
         android:id="@+id/nombreTextView"
@@ -23,16 +29,25 @@
         android:text="nombre"
         android:textSize="18sp"
         android:padding="10dp"
-        android:background="@color/light_gray" />
+        android:background="@color/white" />
 
     <TextView
         android:id="@+id/dniTextView"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="0.8"
         android:text="dni"
         android:textSize="18sp"
         android:padding="10dp"
-        android:background="@color/light_gray" />
+        android:background="@color/white" />
+    <TextView
+        android:id="@+id/vencimientoTextView"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="vencimiento"
+        android:textSize="18sp"
+        android:padding="10dp"
+        android:background="@color/white" />
 
 </TableRow>
