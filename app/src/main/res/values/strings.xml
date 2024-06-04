@@ -40,4 +40,7 @@
     <string name="busque_al_socio_por_dni">Busque al socio por DNI</string>
     <string name="cuota">Cuota</string>
     <string name="nuevo_cobro">Nuevo Cobro</string>
+    <string name="nroSocio">Nª</string>
+    <string name="vencimiento_de_cuota">Vencimiento de cuota</string>
+    <string name="listado_de_socios_con_cuotas_vencidas">Listado de Socios con cuotas vencidas</string>
 </resources>

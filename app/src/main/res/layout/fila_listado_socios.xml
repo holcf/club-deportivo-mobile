@@ -16,7 +16,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.35"
-        android:text="nroSocio"
+        android:text="@string/nroSocio"
         android:textSize="18sp"
         android:padding="10dp"
         android:background="@color/white" />
@@ -26,7 +26,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="nombre"
+        android:text="@string/nombre"
         android:textSize="18sp"
         android:padding="10dp"
         android:background="@color/white" />
@@ -36,7 +36,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.8"
-        android:text="dni"
+        android:text="@string/dni"
         android:textSize="18sp"
         android:padding="10dp"
         android:background="@color/white" />
@@ -45,7 +45,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="vencimiento"
+        android:text="@string/vencimiento_de_cuota"
         android:textSize="18sp"
         android:padding="10dp"
         android:background="@color/white" />
