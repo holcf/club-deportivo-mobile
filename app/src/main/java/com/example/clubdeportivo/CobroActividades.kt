@@ -1,6 +1,7 @@
 package com.example.clubdeportivo
 import android.app.DatePickerDialog
 import android.content.ContentValues
+import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -152,6 +153,10 @@ class CobroActividades : AppCompatActivity() {
                         "Cobro de actividad",
                         "Cobro de actividad realizado correctamente."
                     )
+                    DatosCompartidos.cuotaPagada = cuota
+                    DatosCompartidos.socioPago = selectedNoSocio
+                    DatosCompartidos.tipoPago = "Actividad"
+                    DatosCompartidos.tipoSocioPago = "No Socio (DNI - Nombre)"
                 } else {
                     metodos.mostrarAlerta(
                         this,
@@ -178,6 +183,14 @@ class CobroActividades : AppCompatActivity() {
             btnVerComprobante.isEnabled = false
             btnCobrarActividad.isEnabled = true
             radioButtonToCheck.isChecked = true
+        }
+
+        //
+        // Botón Ver Comprobante
+        //
+        btnVerComprobante.setOnClickListener {
+            val intent = Intent(this, ComprobantePago::class.java)
+            startActivity(intent)
         }
     }
 

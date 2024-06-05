@@ -34,14 +34,22 @@ class ComprobantePago : AppCompatActivity() {
         }
 
         findViewById<TextView>(R.id.editTextFechaPago).text = DatosCompartidos.cuotaPagada?.fechaPago
-        findViewById<TextView>(R.id.editTextInicioCuota).text = DatosCompartidos.cuotaPagada?.fechaInicio
-        findViewById<TextView>(R.id.editTextFinCuota).text = DatosCompartidos.cuotaPagada?.vencimiento
         findViewById<TextView>(R.id.editTextMonto).text = DatosCompartidos.cuotaPagada?.monto.toString()
-
         findViewById<TextView>(R.id.textViewDNI).text =
             "${DatosCompartidos.socioPago?.dni.toString()} - ${DatosCompartidos.socioPago?.nombre}"
 
         findViewById<TextView>(R.id.textTipoUsuario).text = DatosCompartidos.tipoSocioPago
         findViewById<TextView>(R.id.textTipoComprobantePago).text = DatosCompartidos.tipoPago
+
+        if (DatosCompartidos.tipoPago == "Actividad") {
+            // hide cuota fields
+            findViewById<TextView>(R.id.CuotaInicio).visibility = TextView.GONE
+            findViewById<TextView>(R.id.CuotaFin).visibility = TextView.GONE
+            findViewById<TextView>(R.id.editTextInicioCuota).visibility = TextView.GONE
+            findViewById<TextView>(R.id.editTextFinCuota).visibility = TextView.GONE
+        } else {
+            findViewById<TextView>(R.id.editTextInicioCuota).text = DatosCompartidos.cuotaPagada?.fechaInicio
+            findViewById<TextView>(R.id.editTextFinCuota).text = DatosCompartidos.cuotaPagada?.vencimiento
+        }
     }
 }
