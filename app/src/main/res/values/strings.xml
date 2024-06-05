@@ -17,7 +17,7 @@
     <string name="registrar_cobro">Registrar Cobro</string>
     <string name="nueva_inscripci_n">Nueva Inscripción</string>
     <string name="ver_comprobante">Ver Comprobante</string>
-    <string name="fecha_de_pago">Fecha de pago</string>
+    <string name="fecha_de_pago">Fecha de Pago</string>
     <string name="fecha_de_finalizaci_n_de_la_cuota">Fecha de finalización de la cuota</string>
     <string name="fecha_de_inicio_de_cuota">Fecha de inicio de cuota</string>
     <string name="efectivo">Efectivo</string>
@@ -46,4 +46,10 @@
     <string name="cobro_de_actividades">Cobro de actividades</string>
     <string name="busque_al_no_socio_por_dni">Busque al No Socio por DNI</string>
     <string name="actividad">Actividad</string>
+    <string name="comprobante_de_pago_de_cuota">Comprobante de Pago de Cuota</string>
+    <string name="socio_dni_nombre">Socio (DNI - Nombre)</string>
+    <string name="cuota_fecha_de_inicio">Cuota - Fecha de inicio</string>
+    <string name="monto_pagado">Monto pagado</string>
+    <string name="imprimir_comprobante">Imprimir comprobante</string>
+    <string name="cuota_fecha_de_vencimiento">Cuota - Fecha de Vencimiento</string>
 </resources>
