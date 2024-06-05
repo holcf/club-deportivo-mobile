@@ -10,6 +10,9 @@ class DatosCompartidos {
         var usuarioLogueado: String = ""
         var cuotaPagada: Cuota? = null
         var socioPago: Socio? = null
+        var tipoPago: String = ""
+        var tipoSocioPago: String = ""
+
     }
 
 

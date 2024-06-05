@@ -175,6 +175,8 @@ class CobroCuotas : AppCompatActivity() {
                     )
                     DatosCompartidos.cuotaPagada = cuota
                     DatosCompartidos.socioPago = selectedSocio
+                    DatosCompartidos.tipoPago = "Cuota"
+                    DatosCompartidos.tipoSocioPago = "Socio (DNI - Nombre)"
                 } else {
                     metodos.mostrarAlerta(
                         this,

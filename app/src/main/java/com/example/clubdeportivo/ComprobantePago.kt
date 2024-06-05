@@ -40,5 +40,8 @@ class ComprobantePago : AppCompatActivity() {
 
         findViewById<TextView>(R.id.textViewDNI).text =
             "${DatosCompartidos.socioPago?.dni.toString()} - ${DatosCompartidos.socioPago?.nombre}"
+
+        findViewById<TextView>(R.id.textTipoUsuario).text = DatosCompartidos.tipoSocioPago
+        findViewById<TextView>(R.id.textTipoComprobantePago).text = DatosCompartidos.tipoPago
     }
 }
