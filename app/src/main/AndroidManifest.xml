@@ -13,6 +13,9 @@
         android:theme="@style/Base.Theme.ClubDeportivo"
         tools:targetApi="31">
         <activity
+            android:name=".ComprobantePago"
+            android:exported="false" />
+        <activity
             android:name=".CobroActividades"
             android:exported="false" />
         <activity
@@ -20,7 +23,7 @@
             android:exported="false" />
         <activity
             android:name=".Listados"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".Inscribir"
             android:exported="false" />

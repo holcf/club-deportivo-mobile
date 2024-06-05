@@ -8,7 +8,11 @@ import android.database.sqlite.SQLiteOpenHelper
 class DatosCompartidos {
     companion object {
         var usuarioLogueado: String = ""
+        var cuotaPagada: Cuota? = null
+        var socioPago: Socio? = null
     }
+
+
 }
 
 data class Cuota(
