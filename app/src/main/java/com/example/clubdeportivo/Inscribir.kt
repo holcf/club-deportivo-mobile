@@ -1,7 +1,8 @@
 package com.example.clubdeportivo
 
 import android.app.DatePickerDialog
- import android.database.sqlite.SQLiteDatabase
+import android.content.Intent
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
@@ -47,6 +48,18 @@ class Inscribir : AppCompatActivity() {
         //desactivar botón ver carnet hasta que se inscriba un usuario
         val btnVerCarnet: Button = findViewById(R.id.btnVerCarnet)
         btnVerCarnet.isEnabled = false
+        btnVerCarnet.setOnClickListener {
+            val radioGroup: RadioGroup = findViewById(R.id.radiogroup)
+            val selectedRadioButtonText: String = (radioGroup.findViewById<RadioButton>(radioGroup.checkedRadioButtonId))?.text.toString()
+            val intentar = Intent(this, CarnetSocio::class.java).apply {
+                putExtra("SocioNombre", findViewById<EditText>(R.id.editTextNombre).text.toString())
+                putExtra("tipoSocio", selectedRadioButtonText)
+                putExtra("SocioDNI", findViewById<EditText>(R.id.editTextDNI).text.toString().toInt())
+                putExtra("SocioEmail", findViewById<EditText>(R.id.editTextEmail).text.toString())
+                putExtra("SocioFechaInscripcion", editTextDate.text.toString())
+            }
+            startActivity(intentar)
+        }
 
         //radio button socio por defecto
         val radioButtonToCheck: RadioButton = findViewById(R.id.rbtSocio)
