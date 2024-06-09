@@ -8,9 +8,29 @@ import android.database.sqlite.SQLiteOpenHelper
 class DatosCompartidos {
     companion object {
         var usuarioLogueado: String = ""
+        var cuotaPagada: Cuota? = null
+        var socioPago: Socio? = null
+        var tipoPago: String = ""
+        var tipoSocioPago: String = ""
+
     }
+
+
 }
 
+data class Cuota(
+    var nSocio: Int?=null,
+    var monto: Int?=null,
+    var fechaPago: String?=null,
+    var metodoPago: Int?=null,
+    var fechaInicio: String?=null,
+    var vencimiento: String?=null
+)
+
+enum class MetodoPago(val value: Int) {
+    EFECTIVO(0),
+    TARJETA(1)
+}
 object BaseDatos {
       fun crear(db: SQLiteDatabase){
         // BASE DE DATOS

@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ComprobantePago">
+
+    <TextView
+        android:id="@+id/txtComprobantePago"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Comprobante de Pago"
+        android:textSize="28sp"
+
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/textTipoComprobantePago"
+        tools:ignore="TextSizeCheck,TextSizeCheck" />
+
+    <TextView
+        android:id="@+id/textTipoComprobantePago"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Cuota/Actividad"
+        android:textSize="28sp"
+
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/textTipoUsuario"
+         tools:ignore="TextSizeCheck,TextSizeCheck" />
+
+
+    <TextView
+        android:id="@+id/textTipoUsuario"
+        android:layout_width="0dp"
+
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="20dp"
+        android:text="Socio/No Socio"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textTipoComprobantePago"
+        app:layout_constraintWidth_max="320dp" />
+
+    <!-- <Spinner
+        android:id="@+id/spnSocio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:minHeight="30dp"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textDatos"
+        app:layout_constraintWidth_max="320dp" />
+-->
+    <TextView
+        android:id="@+id/editTextInicioCuota"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:autofillHints=""
+
+        android:background="@color/white"
+        android:focusable="false"
+        android:hint="@string/fecha_de_inicio_de_cuota"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="5dp"
+        android:textColorHint="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/CuotaInicio"
+        app:layout_constraintWidth_max="320dp" />
+
+    <TextView
+        android:id="@+id/editTextFinCuota"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:autofillHints=""
+        android:background="@color/white"
+
+        android:focusable="false"
+        android:hint="@string/fecha_de_finalizaci_n_de_la_cuota"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="5dp"
+        android:textColorHint="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/CuotaFin"
+        app:layout_constraintWidth_max="320dp" />
+
+    <TextView
+        android:id="@+id/editTextFechaPago"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:autofillHints=""
+        android:background="@color/white"
+
+        android:focusable="false"
+        android:hint="@string/fecha_de_pago"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="5dp"
+        android:textColorHint="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/CuotaPago"
+        app:layout_constraintWidth_max="320dp" />
+
+    <TextView
+        android:id="@+id/CuotaInicio"
+        android:layout_width="0dp"
+
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/cuota_fecha_de_inicio"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewDNI"
+        app:layout_constraintWidth_max="320dp" />
+
+    <TextView
+        android:id="@+id/CuotaFin"
+        android:layout_width="0dp"
+
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/cuota_fecha_de_vencimiento"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextInicioCuota"
+        app:layout_constraintWidth_max="320dp" />
+
+    <TextView
+        android:id="@+id/CuotaPago"
+        android:layout_width="0dp"
+
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/fecha_de_pago"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextFinCuota"
+        app:layout_constraintWidth_max="320dp" />
+
+    <TextView
+        android:id="@+id/textMetodoPago"
+        android:layout_width="0dp"
+
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/m_todo_de_pago"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextFechaPago"
+        app:layout_constraintWidth_max="320dp" />
+
+
+    <RadioGroup
+        android:id="@+id/rdgMetodoPago"
+        android:layout_width="0dp"
+
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textMetodoPago"
+        app:layout_constraintVertical_bias="0.339"
+        app:layout_constraintWidth_max="320dp">
+
+
+        <RadioButton
+            android:id="@+id/rbtEfectivo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            android:clickable="false"
+            android:paddingStart="2dp"
+            android:paddingEnd="10dp"
+            android:text="@string/efectivo"
+
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/rbtTarjeta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            android:clickable="false"
+            android:contentDescription="@string/no_socio"
+            android:text="@string/tarjeta"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/MontoPagado"
+        android:layout_width="0dp"
+
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/monto_pagado"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rdgMetodoPago"
+        app:layout_constraintWidth_max="320dp" />
+
+    <TextView
+        android:id="@+id/editTextMonto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+
+        android:autofillHints=""
+        android:background="@color/white"
+        android:hint="@string/monto_a_pagar"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="5dp"
+        android:textColorHint="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MontoPagado"
+        app:layout_constraintWidth_max="320dp" />
+
+    <Button
+        android:id="@+id/btnImprimir"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:maxWidth="320dp"
+        android:text="@string/imprimir_comprobante"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextMonto"
+        app:layout_constraintWidth_max="320dp"
+        tools:layout_editor_absoluteY="677dp" />
+
+
+    <TextView
+        android:id="@+id/textViewDNI"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+
+        android:background="@color/white"
+        android:hint="@string/dni"
+        android:paddingStart="10dp"
+
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="5dp"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textTipoUsuario"
+        app:layout_constraintWidth_max="320dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

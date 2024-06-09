@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CobroCuotas">
+
+
+    <TextView
+        android:id="@+id/txtCobroCuotas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/cobro_de_cuotas"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextSizeCheck,TextSizeCheck" />
+
+
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal"
+
+
+        app:layout_constraintBottom_toTopOf="@id/textDatos"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_max="320dp" />
+    <TextView
+        android:id="@+id/textDatos"
+        app:layout_constraintWidth_max="320dp"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/busque_al_socio_por_dni"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="20sp"
+        android:textStyle="bold"
+         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtCobroCuotas" />
+
+    <!-- <Spinner
+        android:id="@+id/spnSocio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:minHeight="30dp"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textDatos"
+        app:layout_constraintWidth_max="320dp" />
+-->
+    <EditText
+        android:id="@+id/editTextInicioCuota"
+        android:textSize="20sp"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:focusable="false"
+        android:hint="@string/fecha_de_inicio_de_cuota"
+        android:inputType="date"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textActividad"
+        app:layout_constraintWidth_max="320dp"
+        android:autofillHints="" />
+    <EditText
+        android:id="@+id/editTextFinCuota"
+        app:layout_constraintWidth_max="320dp"
+        android:textSize="20sp"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:focusable="false"
+        android:hint="@string/fecha_de_finalizaci_n_de_la_cuota"
+        android:inputType="date"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextInicioCuota"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/editTextFechaPago"
+        app:layout_constraintWidth_max="320dp"
+        android:textSize="20sp"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:focusable="false"
+        android:hint="@string/fecha_de_pago"
+        android:inputType="date"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextFinCuota"
+        android:autofillHints="" />
+    <TextView
+        android:id="@+id/textActividad"
+        app:layout_constraintWidth_max="320dp"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/cuota"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="20sp"
+        android:textStyle="bold"
+         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/autoCompleteTextView" />
+
+
+    <TextView
+        android:id="@+id/textMetodoPago"
+        android:layout_width="0dp"
+
+        android:layout_height="wrap_content"
+         android:layout_marginTop="20dp"
+        android:text="@string/m_todo_de_pago"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextFechaPago"
+        app:layout_constraintWidth_max="320dp" />
+
+    <RadioGroup
+        android:id="@+id/rdgMetodoPago"
+        app:layout_constraintWidth_max="320dp"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+         android:orientation="horizontal"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textMetodoPago"
+        app:layout_constraintVertical_bias="0.339">
+
+
+        <RadioButton
+            android:id="@+id/rbtEfectivo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:background="@color/white"
+            android:paddingEnd="10dp"
+            android:paddingStart="2dp"
+            android:layout_marginTop="5dp"
+
+            android:text="@string/efectivo" />
+
+        <RadioButton
+            android:id="@+id/rbtTarjeta"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+             android:textSize="20sp"
+            android:background="@color/white"
+            android:layout_marginTop="5dp"
+            android:contentDescription="@string/no_socio"
+            android:text="@string/tarjeta" />
+
+
+    </RadioGroup>
+    <EditText
+        android:id="@+id/editTextMonto"
+        app:layout_constraintWidth_max="320dp"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="@string/monto_a_pagar"
+        android:inputType="number"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rdgMetodoPago"
+        android:autofillHints="" />
+
+    <Button
+        android:id="@+id/btnCobrar"
+        app:layout_constraintWidth_max="320dp"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:maxWidth="320dp"
+        android:text="@string/registrar_cobro"
+
+        android:textSize="20sp"
+         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextMonto" />
+
+    <Button
+        android:id="@+id/btnVerComprobante"
+        app:layout_constraintWidth_max="320dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:maxWidth="320dp"
+
+        android:enabled="false"
+
+        android:text="@string/ver_comprobante"
+        android:textSize="20sp"
+         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnCobrar" />
+
+    <Button
+        android:id="@+id/btnNuevoCobro"
+        app:layout_constraintWidth_max="320dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="@string/nuevo_cobro"
+        android:textSize="20sp"
+        android:maxWidth="320dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnVerComprobante" />
+
+
+
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView"
+        android:background="@color/white"
+        android:paddingBottom="5dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
+        android:layout_marginTop="5dp"
+
+        android:paddingTop="5dp"
+        android:textSize="20sp"
+        android:hint="@string/dni"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textDatos"
+        app:layout_constraintWidth_max="320dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
