@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="@string/tipo_de_usuario"
+        android:text="@string/tipo_de_usuario_carnet"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/txtValueTipoUsuario"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:text="@string/socio_no_socio"
-        android:textColor="#D3D3D3"
+        android:textColor="#737373"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -65,37 +65,11 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:text="@string/nombre"
-        android:textColor="#D3D3D3"
+        android:textColor="#737373"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/txtValueTipoUsuario"
         app:layout_constraintTop_toBottomOf="@+id/txtValueTipoUsuario" />
-
-    <TextView
-        android:id="@+id/txtLabelApellido"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="@string/apellido"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/txtValueApellido"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/txtValueApellido" />
-
-    <TextView
-        android:id="@+id/txtValueApellido"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/apellido"
-        android:textColor="#D3D3D3"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txtValueNombre"
-        app:layout_constraintTop_toBottomOf="@+id/txtValueNombre" />
 
     <TextView
         android:id="@+id/txtLabelDNI"
@@ -115,37 +89,11 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:text="@string/dni"
-        android:textColor="#D3D3D3"
+        android:textColor="#737373"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txtValueApellido"
-        app:layout_constraintTop_toBottomOf="@+id/txtValueApellido" />
-
-    <TextView
-        android:id="@+id/txtLabelDireccion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="@string/direccion"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/txtValueDireccion"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/txtValueDireccion" />
-
-    <TextView
-        android:id="@+id/txtValueDireccion"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/direccion"
-        android:textColor="#D3D3D3"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txtValueDNI"
-        app:layout_constraintTop_toBottomOf="@+id/txtValueDNI" />
+        app:layout_constraintStart_toStartOf="@+id/txtValueTipoUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/txtValueNombre" />
 
     <TextView
         android:id="@+id/txtLabelEmail"
@@ -165,12 +113,11 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:text="@string/email"
-        android:textColor="#D3D3D3"
+        android:textColor="#737373"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txtValueDireccion"
-        app:layout_constraintTop_toBottomOf="@+id/txtValueDireccion" />
+        app:layout_constraintStart_toStartOf="@+id/txtValueTipoUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/txtValueDNI" />
 
     <TextView
         android:id="@+id/txtLabelFechaInscripcion"
@@ -190,10 +137,10 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:text="@string/fecha_de_inscripcion"
-        android:textColor="#D3D3D3"
+        android:textColor="#737373"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/txtValueEmail"
+        app:layout_constraintStart_toStartOf="@+id/txtValueTipoUsuario"
         app:layout_constraintTop_toBottomOf="@+id/txtValueEmail" />
 
     <Button
