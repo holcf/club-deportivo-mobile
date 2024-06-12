@@ -15,8 +15,6 @@ import com.example.clubdeportivo.metodos.mostrarAlerta
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var dbHelper: MiBaseDeDatosHelper
-    private lateinit var db: SQLiteDatabase
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,8 +27,6 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        dbHelper = MiBaseDeDatosHelper(this)
-        db = dbHelper.writableDatabase
 
 
 
@@ -40,29 +36,18 @@ class MainActivity : AppCompatActivity() {
             val usuario = findViewById<EditText>(R.id.editTextUsuario).text.toString()
             val password = findViewById<EditText>(R.id.editTextPassword).text.toString()
 
-            val cursor = db.rawQuery("SELECT * FROM usuario", null)
             var loginCorrecto = false
 
-            while (cursor.moveToNext()) {
-                val nombreUsu = cursor.getString(1)
-                val passUsu = cursor.getString(2)
-                if (usuario == nombreUsu && password == passUsu){
-                    loginCorrecto = true
-                    break
-                }
+            if (usuario == "Admin" && password == "1234"){
+                loginCorrecto = true
             }
             if (loginCorrecto){
                 DatosCompartidos.usuarioLogueado = usuario
                 val intentar = Intent(this, MenuPrincipal::class.java)
                 startActivity(intentar)
             }else{
-                //Toast.makeText(this, "Usuario incorrecto", Toast.LENGTH_SHORT).show()
                 mostrarAlerta(this, "Error de inicio de sesión", "El nombre de usuario o la contraseña son incorrectos.")
-
             }
-
-            cursor.close()
-            db.close()
 
         }
     }

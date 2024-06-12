@@ -19,8 +19,8 @@ import java.util.Calendar
 import java.util.Locale
 
 class CobroCuotas : AppCompatActivity() {
-    private lateinit var dbHelper: MiBaseDeDatosHelper
-    private lateinit var db: SQLiteDatabase
+//    private lateinit var dbHelper: MiBaseDeDatosHelper
+//    private lateinit var db: SQLiteDatabase
     private lateinit var autoCompleteTextView: AutoCompleteTextView
     private lateinit var calendarInicio: Calendar
     private lateinit var calendarFin: Calendar
@@ -61,21 +61,14 @@ class CobroCuotas : AppCompatActivity() {
         radioButtonToCheck.isChecked = true
 
         //
-        // Carga datos de socios para el AutoCompleteTextView
+        // Agrega socios para el AutoCompleteTextView
         //
         val socios = ArrayList<Socio>()
         var selectedSocio: Socio? = null
-        dbHelper = MiBaseDeDatosHelper(this)
-        db = dbHelper.writableDatabase
-        val cursor = db.rawQuery("SELECT * FROM socio", null)
-        while (cursor.moveToNext()) {
-            val nroSocio = cursor.getInt(0)
-            val nombre = cursor.getString(1)
-            val dni = cursor.getInt(2)
-            socios.add(Socio(nroSocio, nombre, dni))
-        }
-        cursor.close()
-        db.close()
+        socios.add(Socio(123, "Marcos Puerta", 111))
+        socios.add(Socio(456, "Lucas López", 222))
+        socios.add(Socio(789, "Miriam Sanchez", 333))
+
 
         //
         // Configuración del AutoCompleteTextView
@@ -154,8 +147,6 @@ class CobroCuotas : AppCompatActivity() {
                 )
             }
             else {
-                dbHelper = MiBaseDeDatosHelper(this)
-                db = dbHelper.writableDatabase
                 val values = ContentValues().apply {
                     put("NSocio", selectedSocio?.nroSocio)
                     put("Monto", cuota.monto)
@@ -164,26 +155,17 @@ class CobroCuotas : AppCompatActivity() {
                     put("FechaInicio", cuota.fechaInicio)
                     put("Vencimiento", cuota.vencimiento)
                 }
-                val newRowId = db.insert("cuotaSocio", null, values)
-                db.close()
 
-                if (newRowId != -1L) {
-                    metodos.mostrarAlerta(
-                        this,
-                        "Cobro de cuota",
-                        "Cobro de cuota realizado correctamente."
-                    )
-                    DatosCompartidos.cuotaPagada = cuota
-                    DatosCompartidos.socioPago = selectedSocio
-                    DatosCompartidos.tipoPago = "Cuota"
-                    DatosCompartidos.tipoSocioPago = "Socio (DNI - Nombre)"
-                } else {
-                    metodos.mostrarAlerta(
-                        this,
-                        "Error",
-                        "Hubo un error al insertar en la base de datos."
-                    )
-                }
+                metodos.mostrarAlerta(
+                    this,
+                    "Cobro de cuota",
+                    "Cobro de cuota realizado correctamente."
+                )
+                DatosCompartidos.cuotaPagada = cuota
+                DatosCompartidos.socioPago = selectedSocio
+                DatosCompartidos.tipoPago = "Cuota"
+                DatosCompartidos.tipoSocioPago = "Socio (DNI - Nombre)"
+
                 val btnVerComprobante = findViewById<Button>(R.id.btnVerComprobante)
                 btnVerComprobante.isEnabled = true
                 btnCobrarCuota.isEnabled = false

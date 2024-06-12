@@ -68,8 +68,6 @@ class SociosAdapter(private val socios: List<SocioListado>) :
     }
 }
 class Listados : AppCompatActivity() {
-    private lateinit var dbHelper: MiBaseDeDatosHelper
-    private lateinit var db: SQLiteDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -81,39 +79,20 @@ class Listados : AppCompatActivity() {
         }
 
         val socios = mutableListOf<SocioListado>()
+        socios.add(SocioListado(741, "Florencia Gómez", 12345678, "11/5"))
+        socios.add(SocioListado(852, "Octavio Giménez", 98765432, "15/5"))
+        var selectedNoSocio: Socio? = null
+
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
 
+        // Crear un adaptador para RecyclerView
+        val adapter = SociosAdapter(socios)
 
-            dbHelper = MiBaseDeDatosHelper(this)
-            db = dbHelper.writableDatabase
-
-            //val cursor = db.rawQuery("SELECT * FROM socio", null)
-
-            val cursor = db.rawQuery("SELECT Nsocio, Nombre, DNI, ifnull (MCuota, '') AS VencimientoCuota " +
-                    "FROM (SELECT socio.Nsocio, socio.Nombre, socio.DNI, MAX(cuotaSocio.Vencimiento) AS MCuota " +
-                    "FROM socio " +
-                    "JOIN cuotaSocio ON socio.Nsocio = cuotaSocio.Nsocio " +
-                    "GROUP BY socio.Nsocio) t1 " +
-                    "WHERE datetime(MCuota) <= datetime('now')", null)
-
-            while (cursor.moveToNext()) {
-                val nroSocio = cursor.getInt(0)
-                val nombre = cursor.getString(1)
-                val dni = cursor.getInt(2)
-                val vencimientoCuota = cursor.getString(3)
-                socios.add(SocioListado(nroSocio, nombre, dni, vencimientoCuota))
-            }
-            cursor.close()
-            db.close()
-            //Log.d(TAG, socios.toString())
-            // Crear un adaptador para RecyclerView
-            val adapter = SociosAdapter(socios)
-
-            // Asignar el adaptador al RecyclerView
-            recyclerView.adapter = adapter
+        // Asignar el adaptador al RecyclerView
+        recyclerView.adapter = adapter
 
     }
 

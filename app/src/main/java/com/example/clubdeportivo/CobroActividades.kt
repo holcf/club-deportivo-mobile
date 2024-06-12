@@ -19,8 +19,6 @@ import java.util.Calendar
 import java.util.Locale
 
 class CobroActividades : AppCompatActivity() {
-    private lateinit var dbHelper: MiBaseDeDatosHelper
-    private lateinit var db: SQLiteDatabase
     private lateinit var autoCompleteTextView: AutoCompleteTextView
     private lateinit var calendarPago: Calendar
     private lateinit var editTextPago: EditText
@@ -50,17 +48,8 @@ class CobroActividades : AppCompatActivity() {
         //
         val socios = ArrayList<Socio>()
         var selectedNoSocio: Socio? = null
-        dbHelper = MiBaseDeDatosHelper(this)
-        db = dbHelper.writableDatabase
-        val cursor = db.rawQuery("SELECT * FROM nosocio", null)
-        while (cursor.moveToNext()) {
-            val nroSocio = cursor.getInt(0)
-            val nombre = cursor.getString(1)
-            val dni = cursor.getInt(2)
-            socios.add(Socio(nroSocio, nombre, dni))
-        }
-        cursor.close()
-        db.close()
+        socios.add(Socio(111, "Esteban Ramos", 444))
+        socios.add(Socio(222, "Paula Conessa", 555))
 
         //
         // Configuración del AutoCompleteTextView
@@ -136,34 +125,16 @@ class CobroActividades : AppCompatActivity() {
                 )
             }
             else {
-                dbHelper = MiBaseDeDatosHelper(this)
-                db = dbHelper.writableDatabase
-                val values = ContentValues().apply {
-                    put("NSocio", selectedNoSocio?.nroSocio)
-                    put("Monto", cuota.monto)
-                    put("FechaPago", cuota.fechaPago)
-                    put("MetodoPago", cuota.metodoPago)
-                }
-                val newRowId = db.insert("cuotadiaria", null, values)
-                db.close()
+                metodos.mostrarAlerta(
+                    this,
+                    "Cobro de actividad",
+                    "Cobro de actividad realizado correctamente."
+                )
+                DatosCompartidos.cuotaPagada = cuota
+                DatosCompartidos.socioPago = selectedNoSocio
+                DatosCompartidos.tipoPago = "Actividad"
+                DatosCompartidos.tipoSocioPago = "No Socio (DNI - Nombre)"
 
-                if (newRowId != -1L) {
-                    metodos.mostrarAlerta(
-                        this,
-                        "Cobro de actividad",
-                        "Cobro de actividad realizado correctamente."
-                    )
-                    DatosCompartidos.cuotaPagada = cuota
-                    DatosCompartidos.socioPago = selectedNoSocio
-                    DatosCompartidos.tipoPago = "Actividad"
-                    DatosCompartidos.tipoSocioPago = "No Socio (DNI - Nombre)"
-                } else {
-                    metodos.mostrarAlerta(
-                        this,
-                        "Error",
-                        "Hubo un error al insertar en la base de datos."
-                    )
-                }
                 val btnVerComprobante = findViewById<Button>(R.id.btnVerComprobante)
                 btnVerComprobante.isEnabled = true
                 btnCobrarActividad.isEnabled = false

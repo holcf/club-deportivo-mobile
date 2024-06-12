@@ -22,10 +22,6 @@ class Inscribir : AppCompatActivity() {
     private lateinit var editTextDate: EditText
     private lateinit var calendar: Calendar
 
-    private lateinit var dbHelper: MiBaseDeDatosHelper
-    private lateinit var db: SQLiteDatabase
-
-    // función para mostrar una alerta con un mensaje
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,9 +65,6 @@ class Inscribir : AppCompatActivity() {
         val btnInscribir: Button =findViewById(R.id.btnInscribir)
         btnInscribir.setOnClickListener {
 
-            // inicializa la base de datos
-            dbHelper = MiBaseDeDatosHelper(this)
-            db = dbHelper.writableDatabase
 
             // define con que tabla trabajar (socio o nosocio) según la opción seleccionada
             val radioGroup: RadioGroup = findViewById(R.id.radiogroup)
@@ -95,21 +88,10 @@ class Inscribir : AppCompatActivity() {
                 aptoFisico = 1
             }
 
-            //verifica si el usuario ya existe
-            val cursor = db.rawQuery("SELECT COUNT(*) FROM $tablaTipoUsuario WHERE DNI=${dni}", null)
-            var usuarioExiste = false
-            if (cursor.moveToNext() && cursor.getInt(0) > 0) {
-                usuarioExiste = true
-            }
-            cursor.close()
-
             //verifica si faltan datos
             val faltanDatos = nombre.isEmpty() || dni == 0 || correo.isEmpty() || fechaInscripcion.isEmpty()
 
-            if (usuarioExiste){
-                mostrarAlerta(this, "Inscripción",
-                    "El usuario ya existe.")
-            } else if (faltanDatos) {
+            if (faltanDatos) {
                 if (dni == 0) {
                     mostrarAlerta(this, "Inscripción",
                         "El DNI debe ser un número mayor a cero.")
@@ -121,13 +103,6 @@ class Inscribir : AppCompatActivity() {
                 }
             }
             else {
-                //TODO: ver como hice el insert en cobrar cuota, es mejor porque permite checkiar
-                // si se insertó correctamente
-                db.execSQL(
-                    "INSERT INTO $tablaTipoUsuario (NSocio, Nombre, DNI, Correo, FechaInscripcion, AptoFisico) " +
-                            "VALUES (?, ?,?,?,?,?)",
-                    arrayOf(null, nombre, dni, correo, fechaInscripcion, aptoFisico)
-                )
                 mostrarAlerta(
                     this,
                     "Inscripción",
@@ -136,7 +111,6 @@ class Inscribir : AppCompatActivity() {
                 btnVerCarnet.isEnabled = true
                 btnInscribir.isEnabled = false
             }
-            db.close()
         }
 
         val btnNuevaInscripcion: Button = findViewById(R.id.btnNuevaInscripcion)
