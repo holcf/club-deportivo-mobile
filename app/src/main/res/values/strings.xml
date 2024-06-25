@@ -13,7 +13,14 @@
     <string name="inscribir_usurios">Inscribir Usuarios</string>
     <string name="listado_de_cuotas">Listado de Cuotas</string>
     <string name="inscripcion">Inscripción</string>
+    <string name="carnet">Club Deportivo\nCarnet</string>
     <string name="socio">Socio</string>
+    <string name="tipo_de_usuario_carnet">Tipo de\nUsuario</string>
+    <string name="socio_no_socio">Socio / No Socio</string>
+    <string name="apellido">Apellido</string>
+    <string name="direccion">Dirección</string>
+    <string name="fecha_de_inscripcion">Fecha de \nInscripción</string>
+    <string name="imprimir_carnet">Imprimir Carnet</string>
     <string name="registrar_cobro">Registrar Cobro</string>
     <string name="nueva_inscripci_n">Nueva Inscripción</string>
     <string name="ver_comprobante">Ver Comprobante</string>

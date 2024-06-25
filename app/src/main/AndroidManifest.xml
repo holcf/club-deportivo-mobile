@@ -25,6 +25,9 @@
             android:name=".Listados"
             android:exported="true" />
         <activity
+            android:name=".CarnetSocio"
+            android:exported="false" />
+        <activity
             android:name=".Inscribir"
             android:exported="false" />
         <activity
