@@ -1,6 +1,7 @@
 package com.example.clubdeportivo
 
 import android.app.DatePickerDialog
+import android.content.ContentValues
 import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
@@ -21,12 +22,17 @@ import java.util.Locale
 class Inscribir : AppCompatActivity() {
     private lateinit var editTextDate: EditText
     private lateinit var calendar: Calendar
+    private lateinit var btnVerCarnet: Button
+    private lateinit var btnInscribir: Button
+    private lateinit var radioGroup: RadioGroup
+    private lateinit var radioButtonToCheck: RadioButton
+    private lateinit var editTextNombre: EditText
+    private lateinit var editTextDNI: EditText
+    private lateinit var editTextEmail: EditText
+    private lateinit var chkAptoFisico: CheckBox
 
     private lateinit var dbHelper: MiBaseDeDatosHelper
     private lateinit var db: SQLiteDatabase
-
-    // función para mostrar una alerta con un mensaje
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,143 +44,202 @@ class Inscribir : AppCompatActivity() {
             insets
         }
 
+        btnInscribir = findViewById(R.id.btnInscribir)
+        btnVerCarnet = findViewById(R.id.btnVerCarnet)
+        radioGroup = findViewById(R.id.radiogroup)
+        editTextNombre = findViewById(R.id.editTextNombre)
+        editTextDNI = findViewById(R.id.editTextDNI)
+        editTextEmail = findViewById(R.id.editTextEmail)
+        chkAptoFisico = findViewById(R.id.chkAptoFisico)
+
         //configura textview de la fecha para que muestre el calendario al hacer click
         editTextDate = findViewById(R.id.editTextDate)
         calendar = Calendar.getInstance()
         editTextDate.setOnClickListener {
-            showDatePickerDialog()
+            mostrarCalendario()
         }
 
         //desactivar botón ver carnet hasta que se inscriba un usuario
-        val btnVerCarnet: Button = findViewById(R.id.btnVerCarnet)
         btnVerCarnet.isEnabled = false
+
+        //agrega listener al boton Ver Carnet para que muestre el carnet al hacer click
         btnVerCarnet.setOnClickListener {
-            val radioGroup: RadioGroup = findViewById(R.id.radiogroup)
-            val selectedRadioButtonText: String = (radioGroup.findViewById<RadioButton>(radioGroup.checkedRadioButtonId))?.text.toString()
-            val intentar = Intent(this, CarnetSocio::class.java).apply {
-                putExtra("SocioNombre", findViewById<EditText>(R.id.editTextNombre).text.toString())
-                putExtra("tipoSocio", selectedRadioButtonText)
-                putExtra("SocioDNI", findViewById<EditText>(R.id.editTextDNI).text.toString().toInt())
-                putExtra("SocioEmail", findViewById<EditText>(R.id.editTextEmail).text.toString())
-                putExtra("SocioFechaInscripcion", editTextDate.text.toString())
-            }
-            startActivity(intentar)
+            showCarnet()
         }
 
-        //radio button socio por defecto
-        val radioButtonToCheck: RadioButton = findViewById(R.id.rbtSocio)
+        //setear radio button a socio por defecto
+        radioButtonToCheck = findViewById(R.id.rbtSocio)
         radioButtonToCheck.isChecked = true
 
-        //botón inscribir
-        val btnInscribir: Button =findViewById(R.id.btnInscribir)
+        //agrega listener al boton Ver Carnet para que intente inscribir el usuario al hacer click
         btnInscribir.setOnClickListener {
-
-            // inicializa la base de datos
-            dbHelper = MiBaseDeDatosHelper(this)
-            db = dbHelper.writableDatabase
-
-            // define con que tabla trabajar (socio o nosocio) según la opción seleccionada
-            val radioGroup: RadioGroup = findViewById(R.id.radiogroup)
-            val selectedRadioButtonText: String = (radioGroup.findViewById<RadioButton>(radioGroup.checkedRadioButtonId))?.text.toString()
-
-            var tablaTipoUsuario = "socio"
-            if (selectedRadioButtonText == "No Socio") {
-                tablaTipoUsuario = "nosocio"
-            }
-
-            //obtiene los valores del formulario
-            val nombre: String = findViewById<EditText>(R.id.editTextNombre).text.toString()
-            var dni: Number = 0
-            if (!findViewById<EditText>(R.id.editTextDNI).text?.toString().isNullOrEmpty()) {
-                dni = findViewById<EditText>(R.id.editTextDNI).text.toString().toInt()
-            }
-            val correo: String = findViewById<EditText>(R.id.editTextEmail).text.toString()
-            val fechaInscripcion: String = editTextDate.text.toString()
-            var aptoFisico: Number = 0
-            if (findViewById<CheckBox>(R.id.chkAptoFisico).isChecked) {
-                aptoFisico = 1
-            }
-
-            //verifica si el usuario ya existe
-            val cursor = db.rawQuery("SELECT COUNT(*) FROM $tablaTipoUsuario WHERE DNI=${dni}", null)
-            var usuarioExiste = false
-            if (cursor.moveToNext() && cursor.getInt(0) > 0) {
-                usuarioExiste = true
-            }
-            cursor.close()
-
-            //verifica si faltan datos
-            val faltanDatos = nombre.isEmpty() || dni == 0 || correo.isEmpty() || fechaInscripcion.isEmpty()
-
-            if (usuarioExiste){
-                mostrarAlerta(this, "Inscripción",
-                    "El usuario ya existe.")
-            } else if (faltanDatos) {
-                if (dni == 0) {
-                    mostrarAlerta(this, "Inscripción",
-                        "El DNI debe ser un número mayor a cero.")
-                } else {
-                    mostrarAlerta(
-                        this, "Inscripción",
-                        "Falta completar algún campo del formulario."
-                    )
-                }
-            }
-            else {
-                //TODO: ver como hice el insert en cobrar cuota, es mejor porque permite checkiar
-                // si se insertó correctamente
-                db.execSQL(
-                    "INSERT INTO $tablaTipoUsuario (NSocio, Nombre, DNI, Correo, FechaInscripcion, AptoFisico) " +
-                            "VALUES (?, ?,?,?,?,?)",
-                    arrayOf(null, nombre, dni, correo, fechaInscripcion, aptoFisico)
-                )
-                mostrarAlerta(
-                    this,
-                    "Inscripción",
-                    "Inscripción realizada correctamente."
-                )
-                btnVerCarnet.isEnabled = true
-                btnInscribir.isEnabled = false
-            }
-            db.close()
+            inscribir()
         }
 
         val btnNuevaInscripcion: Button = findViewById(R.id.btnNuevaInscripcion)
         btnNuevaInscripcion.setOnClickListener {
-            // Limpia los campos del formulario
-            findViewById<EditText>(R.id.editTextNombre).setText("")
-            findViewById<EditText>(R.id.editTextDNI).setText("")
-            findViewById<EditText>(R.id.editTextEmail).setText("")
-            editTextDate.setText("")
-            findViewById<CheckBox>(R.id.chkAptoFisico).isChecked = false
-            btnVerCarnet.isEnabled = false
-            btnInscribir.isEnabled = true
+            limpiarCampos()
         }
     }
 
-    private fun showDatePickerDialog() {
+    private fun mostrarCalendario() {
         val currentYear = calendar.get(Calendar.YEAR)
         val currentMonth = calendar.get(Calendar.MONTH)
         val currentDay = calendar.get(Calendar.DAY_OF_MONTH)
 
         val datePickerDialog = DatePickerDialog(
             this,
-            { _, year, month, dayOfMonth ->
-                // Maneja la fecha seleccionada
-                calendar.set(Calendar.YEAR, year)
-                calendar.set(Calendar.MONTH, month)
-                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-
-                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                val selectedDate = dateFormat.format(calendar.time)
-
-                editTextDate.setText(selectedDate)
-            },
+            dateSetListener,
             currentYear,
             currentMonth,
             currentDay
         )
-
         datePickerDialog.show()
+    }
+
+    private val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+        calendar.set(Calendar.YEAR, year)
+        calendar.set(Calendar.MONTH, month)
+        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val selectedDate = dateFormat.format(calendar.time)
+
+        editTextDate.setText(selectedDate)
+    }
+
+    private fun showCarnet() {
+        val selectedRadioButtonText: String = (radioGroup.findViewById<RadioButton>(radioGroup.checkedRadioButtonId))?.text.toString()
+        val intentar = Intent(this, CarnetSocio::class.java).apply {
+            putExtra("SocioNombre", editTextNombre.text.toString())
+            putExtra("tipoSocio", selectedRadioButtonText)
+            putExtra("SocioDNI", editTextDNI.text.toString().toInt())
+            putExtra("SocioEmail", editTextEmail.text.toString())
+            putExtra("SocioFechaInscripcion", editTextDate.text.toString())
+        }
+        startActivity(intentar)
+    }
+
+    private fun limpiarCampos() {
+        disableEnable(true)
+        editTextNombre.setText("")
+        editTextDNI.setText("")
+        editTextEmail.setText("")
+        editTextDate.setText("")
+        chkAptoFisico.isChecked = false
+        btnVerCarnet.isEnabled = false
+        btnInscribir.isEnabled = true
+    }
+
+    private fun inscribir() {
+        // inicializa la base de datos
+        dbHelper = MiBaseDeDatosHelper(this)
+        db = dbHelper.writableDatabase
+
+        // define con que tabla trabajar (socio o nosocio) según la opción seleccionada
+        radioGroup = findViewById(R.id.radiogroup)
+        val selectedRadioButtonText: String = (radioGroup.findViewById<RadioButton>(radioGroup.checkedRadioButtonId))?.text.toString()
+
+        var tablaTipoUsuario = "socio"
+        if (selectedRadioButtonText == "No Socio") {
+            tablaTipoUsuario = "nosocio"
+        }
+
+        //obtiene los valores del formulario
+        val nombre: String = editTextNombre.text.toString()
+        var dni: Number = 0
+        if (!editTextDNI.text?.toString().isNullOrEmpty()) {
+            dni = editTextDNI.text.toString().toInt()
+        }
+        val correo: String = editTextEmail.text.toString()
+        val fechaInscripcion: String = editTextDate.text.toString()
+        var aptoFisico: Number = 0
+        if (chkAptoFisico.isChecked) {
+            aptoFisico = 1
+        }
+
+        //verifica si el usuario ya existe
+        val cursor = db.rawQuery("SELECT COUNT(*) FROM $tablaTipoUsuario WHERE DNI=${dni}", null)
+        var usuarioExiste = false
+        if (cursor.moveToNext() && cursor.getInt(0) > 0) {
+            usuarioExiste = true
+        }
+        cursor.close()
+
+        //verifica si faltan datos
+        val faltanDatos = nombre.isEmpty() || correo.isEmpty() || fechaInscripcion.isEmpty()
+
+        if (usuarioExiste){
+            mostrarAlerta(this, "Inscripción",
+                "El usuario ya existe.")
+                return
+        }
+
+        if (dni == 0) {
+            mostrarAlerta(this, "Inscripción",
+                "El DNI debe ser un número mayor a cero.")
+            return
+        }
+
+        if (aptoFisico == 0) {
+            mostrarAlerta(this, "Inscripción",
+                "El aspirante debe tener apto físico")
+            return
+        }
+
+        if (faltanDatos) {
+            mostrarAlerta(
+                this, "Inscripción",
+                "Falta completar algún campo del formulario."
+            )
+            return
+        }
+
+        val values = ContentValues().apply {
+            put("Nombre", nombre)
+            put("DNI", dni.toInt())
+            put("Correo", correo)
+            put("FechaInscripcion", fechaInscripcion)
+            put("AptoFisico", aptoFisico.toInt())
+        }
+        val newRowId = db.insert( tablaTipoUsuario, null, values)
+
+        if (newRowId == -1L) {
+            mostrarAlerta(
+                this,
+                "Error",
+                "Hubo un error durante la inscripción."
+            )
+            return
+        }
+        mostrarAlerta(
+            this,
+            "Inscripción",
+            "Inscripción realizada correctamente."
+        )
+        disableEnable(false)
+
+        btnInscribir.isEnabled = false
+        btnVerCarnet.isEnabled = true
+        db.close()
+    }
+
+    private fun disableEnable(condition: Boolean) {
+        disableRadioGroup(radioGroup, condition)
+        btnInscribir.isEnabled = condition
+        editTextNombre.isEnabled = condition
+        editTextDNI.isEnabled = condition
+        editTextEmail.isEnabled = condition
+        editTextDate.isEnabled = condition
+        chkAptoFisico.isEnabled = condition
+    }
+
+    private fun disableRadioGroup(radioGroup: RadioGroup, condition: Boolean) {
+        for (i in 0 until radioGroup.childCount) {
+            val view = radioGroup.getChildAt(i)
+            if (view is RadioButton) {
+                view.isEnabled = condition
+            }
+        }
     }
 }
